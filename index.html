@@ -271,10 +271,10 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
 
 <h3>16. Oracle Operators</h3>
 	
-		<pre>IN     	<span>    |</span>  NOT IN </pre>
-			<pre>BETWEEN AND <span>|</span>  NOT BETWEEN AND </pre>
-		<pre>LIKE <span>       |</span>  NOT LIKE</pre>
-			<pre>IS NULL  <span>   |</span>   IS NOT NULL</pre>
+		<pre>IN     	<span>     |</span>  NOT IN </pre>
+			<pre>BETWEEN AND <span> |</span>  NOT BETWEEN AND </pre>
+		<pre>LIKE <span>        |</span>  NOT LIKE</pre>
+			<pre>IS NULL  <span>    |</span>   IS NOT NULL</pre>
 	</pre>
 	<hr>
 
@@ -288,10 +288,493 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
 	<hr>
 
 
+	<h3>18. IN Process NULL</h3>
+	NO 
+	<hr>
+	
+<h3>19. Pattern Matching | Wildcard Search?</h3>
+	LIKE OPERATOR
+
+<hr>
 
 
 
+<h3> 20. Difference Between Substring and Instring</h3>
 
+            <table>
+                
+                <thead>
+                    <tr>
+                        <th>SUBSTR</th>
+                        <th>INSTR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.Used to get part of the String	</td>
+                        <td>Used to get the position of the particular character.</td>
+                    </tr>
+                    <tr>
+                        <td>2. It has 3 argumnets: Input String, Starting Poisition, No of Characters to be print	</td>
+                        <td>It hasd 4 Arguments Input string, Character to be search, starting position, no of occurance</td>
+
+                    </tr>
+                   
+                </tbody>
+            </table>
+<hr>
+
+
+<h3>21. Oracle Functions</h3>
+<ul>
+  <li>
+    Single Row Function (n->n)
+    <span class="note">-- n number of rows input and n number of rows output</span>
+  </li>
+  <li>
+    Multiple Row Function (n->1)
+    <span class="note">-- n number of rows input and 1 number of row output</span>
+  </li>
+</ul>
+
+<h3>1. Single Row Function</h3>
+<ul>
+  <li>Case Function</li>
+  <li>Number Function</li>
+  <li>Date Function</li>
+  <li>Type Conversion</li>
+  <li>General Function | NULL Function</li>
+</ul>
+
+<h3>(i) Case Function</h3>
+<ul>
+  <li>
+    Case Manipulation
+    <ul>
+      <li><code>UPPER()</code></li>
+      <li><code>LOWER()</code></li>
+      <li><code>INITCAP()</code></li>
+    </ul>
+  </li>
+  <li>
+    Character Manipulation
+    <ul>
+      <li><code>LENGTH ()</code></li>
+      <li><code>CONCAT()</code></li>
+      <li><code>REVERSE()</code></li>
+      <li><code>SUBSTR()</code> | <code>INSTR()</code></li>
+      <li><code>LPAD()</code> | <code>RPAD()</code></li>
+      <li><code>LTRIM ()</code> | <code>RTRIM()</code></li>
+      <li><code>REPLACE ()</code> | <code>TRANSLATE ()</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3>(ii) Number Function</h3>
+<ul>
+  <li><code>ROUND()</code></li>
+  <li><code>TRUNC()</code></li>
+  <li><code>CEIL()</code></li>
+  <li><code>FLOOR()</code></li>
+  <li><code>MOD()</code></li>
+  <li><code>ABS()</code></li>
+  <li><code>SIGN()</code></li>
+</ul>
+
+<h3>(iii) Date Function</h3>
+<ul>
+  <li><code>MONTHS_BETWEEN ()</code></li>
+  <li><code>ADD_MONTHS()</code></li>
+  <li><code>NEXT_DAY ()</code></li>
+  <li><code>LAST_DAY()</code></li>
+</ul>
+
+<h3>(iv) Type Conversion</h3>
+<ul>
+  <li><code>TO_CHAR()</code></li>
+  <li><code>TO_NUMBER()</code></li>
+  <li><code>TO_DATE()</code></li>
+  <li><code>TO_TIMESTAMP()</code></li>
+</ul>
+
+<h3>(v) General Function | NULL Function</h3>
+<ul>
+  -- is to handle NULL values
+  <li><code>NVL()</code></li>
+  <li><code>NVL2()</code></li>
+  <li>
+    <code>NULLIF()</code>
+    <span class="note">-- return null value if 2 expression is same otherwise it return 1st expression.</span>
+  </li>
+  <li>
+    <code>COALESCE()</code>
+    <span class="note">-- print 1st not NULL value</span>
+  </li>
+</ul>
+
+<h3>(2) Group Function | Aggregate Function</h3>
+<ul>
+ -- never process NULL values except COUNT(*)
+  <li><code>MIN()</code></li>
+  <li><code>MAX()</code></li>
+  <li><code>SUM()</code></li>
+  <li><code>AVG()</code></li>
+  <li><code>COUNT()</code></li>
+  <li><code>GROUP BY</code></li>
+  <li><code>HAVING</code></li>
+</ul>
+
+<hr>
+
+<h3>22. How many Nested Function we can Write?</h3>
+	255 Nested Functions.
+
+<hr>
+
+
+<h3> 23. Difference Between NVL and NVL2</h3>
+
+            <table>
+                
+                <thead>
+                    <tr>
+                        <th>NVL</th>
+                        <th>NVL2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. NVL has 2 arguments</td>
+                        <td>NVL2 has 3 arguments</td>
+                    </tr>
+                    <tr>
+                        <td>2. If 1st argument is NULL it return 2nd argument otherwise it return 1st argument</td>
+                        <td>IF 1st argument is NULL it return 3rd argument otherwise return 2nd</td>
+
+                    </tr>
+                   
+                </tbody>
+            </table>
+<hr>
+
+
+<h3>24. Query Execution Order.</h3>
+<ul>
+<li>FROM </li>
+<li>WHERE</li> 
+<li>GROUP BY </li>
+<li>HAVING </li>
+<li>SELECT </li>
+<li>ORDER BY</li> 
+</ul>
+
+---
+
+<ul>	
+	<li>FROM</li> 
+	<li>ON</li> 
+	<li>JOIN</li> 
+	<li>WHERE</li> 
+	<li>GROUP BY</li> 
+		  --WITH CUBE or WITH ROLLUP
+	<li>HAVING</li> 
+	<li>SELECT</li> 
+	<li>DISTINCT</li> 
+	<li>ORDER BY </li> 
+	<li>LIMIT</li> 
+</ul>
+
+<hr>
+
+
+<h3> 25. Difference Between WHERE clause and HAVING clause</h3>
+
+            <table>
+                
+                <thead>
+                    <tr>
+                        <th>WHERE Clause</th>
+                        <th>HAVING Clause</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. WHERE follows FROM clause</td>
+                        <td>HAVING clause follows GROUP clause</td>
+                    </tr>
+                    <tr>
+                        <td>2. If it is a Normal Condition use WHERE clause</td>
+                        <td>Condition depends on Having Clause</td>
+
+                    </tr>
+					<tr>
+						<td>3. Restriction will happen after fetching</td>
+						<td>Restrinction will happen after Grouping</td>
+					</tr>
+                   
+                </tbody>
+            </table>
+<hr>
+
+
+<h3>26. Difference between Decode () and Case ()</h3>
+	<ul>
+	<li>Decode is a Function</li>
+	<li>Case is an Expression</li>
+	</ul>
+	<table>
+                
+		<thead>
+			<tr>
+				<th>Decode</th>
+				<th>CASE</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1. Decode is a Function </td>
+				<td>CASE is a Expression</td>
+			</tr>
+			<tr>
+				<td>2. Exact Match we use </td>
+				<td>We can use any Operators like <,>,+,<=</td>
+
+			</tr>
+			<tr>
+				<td>3. Oracle Standard</td>
+				<td>ANSI</td>
+			</tr>
+			<tr>
+				<td>4. We can use in SQL</td>
+				<td>we can use in both SQL and Pl/SQL</td>
+			</tr>
+			<tr>
+				<td>5. Slow</td>
+				<td>Fast</td>
+			</tr>
+		   
+		</tbody>
+	</table>
+
+	<ul>
+		<li>Decode can use in PLSQL but have some Limitations</li>
+		<li>Deocode can use only for compare equality not other conditions <, > </li>
+		<li>Decode return single value </li>
+		<li>Decode makes context switch b/w sql and plsql </li>
+		</ul>
+
+<hr>
+
+<h3>27. What is Join and Types of Join?</h3>
+	
+	Fetching Data from multiple table based on common column 
+
+	<ul>
+		<li>Equi Join (Matched Record)</li>
+		<li>Outer Join (Matched Record + Unmatched Record)
+		  <ul>
+			<li>Left Outer Join (Matched Record + Unmatched Record From Left side Table)</li>
+			<li>Right Outer Join (matched Record + Unmatched Record From Right side Table)</li>
+			<li>Full Outer Join (Matched Record + Unmatched Record From Both side Table)</li>
+		  </ul>
+		</li>
+		<li>Self Join -- selecting data within a table</li>
+		<li>Cross Join</li>
+		<li>Natural Join</li>
+	  </ul>
+<hr>
+
+<h3>28. What is CROSS Join 	- Cartesian Join / Product.</h3>
+	<p>Cross Join also called Wrong Join
+	<p>If you ignore the Join condition | invalid Join Condition
+	<p>All the Rows in the first table will Join with all the Rows with Second Table.
+
+<hr>
+
+<h3>29. How to Avoid Cross Join?</h3>
+	By using Proper Join condition 
+
+	<hr>
+
+<h3>30. How to get Unmatched Record?</h3>
+	Full Outer Join Minus Equi Join 
+
+
+<hr>
+
+<h3>31. Sub Query?</h3>
+	<p>Query Within another Query
+	<p>The Inner Query writen inside () - parenthesis
+	<p>Inner Query will get executed first based on that Outer Query will execute.
+	
+
+<h4><u>Types</u></h4>
+	<ul>
+<li>Single Row Subquery</li>
+<li>Multiple Row Sub Query</li>
+<li>Scalar Subquery (SELECT clause)</li>
+<li>Inline View (FROM clause)</li>
+<ul>
+<li>	Multiple Column Subquery</li>
+<li>	Correlated Subquery</li>
+</ul>
+</ul>
+
+<hr>
+
+<h3>32. Single Row Subquery and its Operators?</h3>
+	<p>If a query return exactly one row.
+	<p>Relational Operators : < , > , <=, >=, <>
+
+<h4> Who are all getting salary more than Avg salary of the company?</h4>
+<pre>
+<code>
+	SELECT *
+	 FROM employees 
+	WHERE salary > (SELECT AVG(salary) FROM employees); 
+	</code>
+</pre>
+<hr>
+
+<h3>33. Multiple Row Subquery?</h3>
+	<p>If a query return more than one row.
+	<p>Comparison Operators : IN ANY ALL
+
+<h4> Display all department_names which contains employees?</h4>
+<pre>
+<code>
+SELECT * FROM departments
+WHERE department_id IN (SELECT department_id FROM employees)
+</code>
+</pre>
+<hr>
+
+<h3>34. Inline View?</h3>
+	<p>Query written in FROM Clause
+	<p>We are selecting Data from Intermediate Resultset.
+	
+<h4> Display all the departments which contain more no of employees?</h4>
+
+<pre>
+<code>
+SELECT X.* 
+FROM (SELECT department_id, COUNT(*) dcount FROM employees GROUP BY department_id) X
+  , (SELECT MAX(COUNT(*)) dmcount FROM employees GROUP BY department_id) Y
+WHERE X.dcount = Y.dmcount;
+</code>
+</pre>
+<hr>
+
+<h3>35. Correlated Sub Query or Synchronized Subquery?</h3>
+	<p>Outer Query will execute FIRST
+	<p>based on that inner query will get execute
+	<p>We cant execute Inner Query alone
+	<p>For each row input will be different.</p>
+
+<h4>Display who are all getting salary more than avg salary of their department.</h4>
+
+		<pre>
+		<code>
+		SELECT e.employee_id, e.first_name,e.hire_date,e.salary, e.department_id
+		FROM employees e
+		WHERE e.salary >(SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
+		</code>
+		</pre>
+		
+
+<hr>
+
+<h3>36. Types of Statements?</h3>
+
+
+<h4>1. DDL - Data Definition Language (CARDT)</h4>
+<ul>
+	<li>CREATE            </li>
+	<li>ALTER
+		<ul>
+			<li>ADD MODIFY RENAME DROP     -- Column Level</li>
+		</ul>
+	</li>
+	<li>RENAME</li>
+	<li>DROP</li>
+	<li>TRUNCATE</li>
+</ul>
+
+<h4>2. DML - Data Manipulation Language (Data)</h4>
+<ul>
+	<li>INSERT  </li>
+	<li>UPDATE</li>
+	<li>DELETE</li>
+	<li>MERGE   (INSERT+UPDATE)      </li>
+</ul>
+
+<h4>3. TCL - Transaction Control Language</h4>
+<ul>
+	<li>COMMIT</li>
+	<li>ROLLBACK</li>
+	<li>SAVEPOINT</li>
+</ul>
+
+<h4>4. DCL - Data Control Language</h4>
+<ul>
+	<li>GRANT</li>
+	<li>REVOKE</li>
+</ul>
+
+<hr>
+
+
+<h3>37. Data Types in Oracle.</h3>
+<ul>
+<li> CHAR</li>
+<li> VARCHAR</li>
+<li> NUMBER (p, s)	</li>	
+<li> DATE</li>
+<li> TIMESTAMP</li>
+<li> LONG	</li>		 
+<li> CLOB					-- upload files</li>
+<li> BLOB					-- upload images</li>
+<li> RAW</li>
+<li> XML_TYPE</li>
+<li> ROWID</li>
+</ul>
+
+
+<hr>
+
+<h3>38. LONG </h3>
+	 <p>Store 2gb 
+	 <p>Per Table 1 LONG
+	 <p>Cannot use in ORDER BY | GROUP BY
+	 <p>Cannot Copy Long Column.
+	
+<hr>	
+
+<h3>39. Size of VARCHAR</h3>
+	<p>Default : 4000 	--  upto 11g
+	<p>Increase : 32767 --12c,18c,19c
+
+<hr>
+
+<h3>39. CLOB?</h3>
+	<p>Store 4gb of Data.
+	<p>Per Table 1 CLOB
+	<p>Cannot use in ORDER BY | GROUP BY
+	<p>Cannot Copy CLOB Column.
+	 
+		<hr>
+
+<h3>40. BLOB?</h3>
+	<p>image | Video
+	<p>Store 4gb of Data
+
+		<hr>
+		
+<h3>41. Table Design Document?</h3>
+
+	Contains Information about Table name, Column name, Datatypes.	-- length of Table Name is 30 maximum 128 bytes
+
+	<hr>
 
 
 
