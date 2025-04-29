@@ -118,11 +118,10 @@
         @media (max-width: 768px) {
     /* Mobile table adjustments */
     table {
-        display: block;
-        overflow-x: auto; /* Enables horizontal scrolling */
-        width: 100%;
-        white-space: nowrap; /* Prevents table from breaking into multiple lines */
-    }
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* or 'fixed' if necessary */
+}
             nav ul li {
                 width: 100%;
                 text-align: center;
@@ -157,10 +156,10 @@
         }
 
         th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
+  padding: 8px;
+  text-align: left;
+  word-break: break-word;
+}
 
         pre {
             background-color: #f4f4f4;
@@ -1352,6 +1351,7 @@ NOCACHE;
 </pre>
 
 <hr>
+
 
 
 
