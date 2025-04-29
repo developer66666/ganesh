@@ -1100,25 +1100,129 @@ For reporting purpose we can use CHAR bcs we dont want to use padding like LPAD,
 	</table>
 
 
+<hr>
+
+    <h3>50. How many Primary key can Create Per Table?</h3>
+	<p>1 Primary Key per Table.
+
+<hr>
+
+<h3>51. Is it Possible to have more than one Primary Key in a Table?</h3>
+<p>	Yes By using Unique Key and NN 
+<p>	PK -> _uk + _nn
+
+<hr>
+
+<h3>52. We can CREATE Primary Key for Multiple Column</h3>
+	<p>Composite Primary Key
+
+<hr>	
+<h3>53. Table -> 5 Constraints -> DROP?</h3>
+	<p> All the Constraints will also get Droped
+
+<hr>
 
 
+<h3>54. When copy a Table what happen to Constraint?</h3>
+	<p>No constrints will not copy except NOT NULL.
+
+<hr>
+
+<h3>55. What happen if a Table was Dropped?</h3>
+<p>	All the Data, Constraints will dropped Except View 	bcs View is Out of the table it is a Schema Object.
+
+<hr>
+	
+    <h3>56. Foreign Key Syntax</h3>
+    <p>   ALTER TABLE table_name ADD CONSTRAINS constrint_name FOREIGN KEY for Which Column REFERENCES Which table for Which Column.
+    
+    <hr>
+    
+    <h3>57. If you try to delete a Foreign Key like Department_id 30 what happen the employees in that department?</h3>
+ 
+    <pre>
+ DELETE FROM departments WHERE department_id=30;
+    </pre>
+        
+    *	ERROR : integrity constraint (HR.EMP_DEPT_FK) violated - child record found
+
+<hr>
+
+    <h3>58. How to Overcome integrity constraint violated?</h3>
+    <li>	ON DELETE CASADE</li>
+    <li>	ON DELETE SET NULL</li>
+
+<hr>
+
+<h3>59. Merge Statement?</h3>
+<p>To synchronize the data from a source table to a target table we use the MERGE statement:</p>
+<ul>
+  <li>If NOT MATCHED then INSERT</li>
+  <li>If MATCHED then UPDATE</li>
+</ul>
+
+<hr>
+
+<h3>60. Merge Syntax?</h3>
+
+<pre>
+MERGE INTO [schema].target_table_name
+USING source_table
+  ON join_condition
+WHEN MATCHED THEN
+  UPDATE  
+	SET col1 = val1
+	[, col2 = val2...]
+   [WHERE conditional_expression]
+   DELETE WHERE conditional_expression
+WHEN NOT MATCHED THEN
+	INSERT(col1, col2, .., coln)
+     VALUES(val1, val2, .., valn)
+	[WHERE conditional_expression];
+  
+</pre>
+
+<hr>
 
 
+<h3>61. Flashback;</h3>
+	<p>Flashback Table test_tb TO BEFORE DROP;
+
+<hr>
+
+<h3>62. Purge?</h3>
+	<p>SQL>PURGE RECYCLEBIN;	
+
+<hr>
+	
+<h3>62. Recyclebin?</h3>
+	<pre>
+SELECT * 
+  FROM recyclebin 
+WHERE original_name LIKE '%TEST_TB%';
+</pre>
+
+<hr>
+
+<h3>63. What is Pseudocolumn?</h3>
+<p>	It is not a Column inside the Table but act as a Column.
+<p>	Mostly use in PLSQL</p>
+<hr>
 
 
+<h3>64. What are Pseudocolumns?</h3>
+<li>USER</li>
+<li>UID</li>
+<li>SYDATE</li>
+<li>SYSTIMESTAMP</li>
+<li>ROWNUM			-- generate unique number at run time </li>
+<li>ROWID</li>
+<li>NEXTVAL			-- seq related pseudocolumns</li>
+<li>CURRVAL</li>
+<li>LEVEL</li>
+<li>ORA_ROWSCN</li>
 
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
 
 
 
