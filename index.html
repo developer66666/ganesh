@@ -335,8 +335,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 
                 <thead>
                     <tr>
-                        <th>DBMS</th>
-                        <th>RDBMS</th>
+                        <th><center>DBMS</center></th>
+                        <th><center>RDBMS</center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -430,8 +430,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 
                 <thead>
                     <tr>
-                        <th>SUBSTR</th>
-                        <th>INSTR</th>
+                        <th><center>SUBSTR</center></th>
+                        <th><center>INSTR</center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -560,8 +560,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 
                 <thead>
                     <tr>
-                        <th>NVL</th>
-                        <th>NVL2</th>
+                        <th><center>NVL</center></th>
+                        <th><center>NVL2</center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -615,8 +615,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 
                 <thead>
                     <tr>
-                        <th>WHERE Clause</th>
-                        <th>HAVING Clause</th>
+                        <th><center>WHERE Clause</center></th>
+                        <th><center>HAVING Clause<</center>/th>
                     </tr>
                 </thead>
                 <tbody>
@@ -648,8 +648,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 
 		<thead>
 			<tr>
-				<th>Decode</th>
-				<th>CASE</th>
+				<th><center>Decode</center></th>
+				<th><center>CASE</center></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -916,8 +916,8 @@ WHERE e.salary >(SELECT AVG(salary)
                    
                    <thead>
                        <tr>
-                           <th>VARCHAR2</th>
-                           <th>CHAR</th>
+                           <th><center>VARCHAR2</center></th>
+                           <th><center>CHAR</center></th>
                        </tr>
                    </thead>
                    <tbody>
@@ -950,9 +950,9 @@ For reporting purpose we can use CHAR bcs we dont want to use padding like LPAD,
                    
     <thead>
         <tr>
-            <th>TRUNCATE</th>
-            <th>DROP</th>
-            <th>DELETE</th>
+            <th><center>TRUNCATE</center></th>
+            <th><center>DROP</center></th>
+            <th><center>DELETE</center></th>
         </tr>
     </thead>
     <tbody>
@@ -1059,43 +1059,44 @@ For reporting purpose we can use CHAR bcs we dont want to use padding like LPAD,
 <table>                
     <thead>
         <tr>
-            <th>Constarint</th>
-            <th>Duplicates</th>
-            <th>NULL</th>
-			<th> i.e </th>
+            <th><center>Constarint</center></th>
+            <th><center>Duplicates</center></th>
+            <th><center>NULL</center></th>
+			<th> <center>i.e</center> </th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Primary KEY</td>
-            <td>X</td>
-            <td>X</td>
-			<td>customer_id, order_id, invoice_id</td>
+            <th>Primary KEY</th>
+            <td> <center>X</center></td>
+            <td><center>X</center></td>
+			<td><center>customer_id, order_id, invoice_id</center></td>
 
         </tr>
         <tr>
-            <td>Unique</td>
-            <td>X</td>
-            <td>Yes</td>
-			<td>email_id, pan</td>
+           
+            <th>Unique</th>
+            <td><center>X</center></td>
+            <td><center>Yes</center></td>
+			<td><center>email_id, pan</center></td>
         </tr>	
 		<tr>
-            <td>Foreign Key</td>
-            <td>Yes</td>
-            <td>Yes</td>
-			<td>department_id</td>
+            <th>Foreign Key</th>
+            <td><center>Yes</center></td>
+            <td><center>Yes</center></td>
+			<td><center>department_id</center></td>
         </tr>
 		<tr>
-            <td>CHECK</td>
+            <th>CHECK</th>
             <td></td>
  
         </tr>
 		<tr>
-            <td>NOT NULL</td>
+            <th>NOT NULL</th>
             <td>100% in Column Level</td>
 
         </tr>		
-		
+	
 	</tbody>
 	</table>
 
@@ -1224,17 +1225,120 @@ WHERE original_name LIKE '%TEST_TB%';
 
 <hr>
 
+<h3>65. What are Analytical Functions?</h3>
+
+<li>MIN() OVER()</li>
+<li>MAX() OVER()</li>
+<li>SUM() OVER()</li>
+<li>AVG() OVER()</li>
+<li>COUNT() OVER()</li>
+<li>LEAD() OVER()</li>
+<li>LAG() OVER()</li>
+<li>FIRST_VALUE() OVER()</li>
+<li>LAST_VALUE() OVER()</li>
+<li>RANK() OVER()</li>
+<li>DENSE_RANK() OVER()</li>
+<li>LISTAGG()</li>
+<li>ROW_NUMBER() OVER()</li>
+<li>NTH_VALUE() OVER()</li>
+	
+<hr>
+
+<h3>66. Listagg() using? and using DISTINCT in Listagg()?</h3>
+
+<p>	Transforming Data from multiple row to single list of value seperated by delimited 
+<p>	Listagg() is 11g  and using DISTINCT in LISTAGG - 19c
+
+<hr>
+
+
+<h3>67. Limitations in LISTAGG()?</h3>
+	4000 charcter Limit
+
+<hr>
+
+<h3>68. Group function vs Analytical Function.</h3>
+
+<table>
+    <tr>
+
+        <th><center>Aggregate Function</center></td>
+        <th><center>Analytical Function</center></td>
+   
+    </tr>
+    <tbody>
+    <tr>
+        <td>1.Return a single summary value.</td>
+        <td>Return the same number of rows as the input.</td>
+
+    </tr>
+    
+    <tr>
+        <td>2.groups of rows on which they operate through the SQL GROUP BY clause</td>
+        <td>groups of rows on which they operate through window partition and window frame clauses</td>
+    </tr>
+    
+    <tr>
+        <td>3.Performance wise Slower than Analytical</td>
+        <td>Performance wise Faster</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+<hr>
 
 
 
+<h3>69. Diff bewtween ROW_NUMBER and ROWID?</h3>
 
+<table>
+    <th><Center>ROW_ID</Center></th>
+    <th><center>ROW_NUM</center></th>
+    <th><center>ROW_NUMBER</center></th>
+    <tbody>
+    <tr>
+    <td>1. Row_id is a Pseudocolumn</td>
+    <td>Row_num is a Pseudocolumn</td>
+    <td>Row_number is a Analytical Function</td>
+    </tr>
+    
+    <tr>
+    <td>2. It represent Physical address of Rows</td>
+    <td>Sequence Number allocating during execution</td>
+    <td>assign number to each row according to ordering within the group</td>
+    </tr>
+    
+    <tr>
+    <td>3. ROW_ID is PERMANENT</td>
+    <td>ROW_NUM is Temporary</td>
+    <td>ROW_NUMBER is Temporary </td>
+    </tr>
+    
+    <tr>
+    <td>4. Its is 18 charcter String</td>
+    <td>It is a Number 	</td>
+    <td>It is a Number </td>
+    </tr>
+    
+    <tr>
+    <td>5. It gives address of the ROW</td>
+    <td>It gives count to row</td>
+    <td>It gives Rank to Row</td>
+    </tr>
+    
+    </tbody>
+    </table>
 
+<hr>
 
+<h3>70. What is Sequence?</h3>
+<li>Sequence is used to Generate Unique Numbers</li>
+<li>Moslty used to generate Primary KEY</li>
+<li>One of Schema Object | Sharable OBJECT</li>
+<li>Max Size : 27(99999..)</li>
 
-
-
-
-
+<hr>
 
 
 
