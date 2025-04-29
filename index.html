@@ -1004,17 +1004,101 @@ For reporting purpose we can use CHAR bcs we dont want to use padding like LPAD,
 
 <hr>
 
+<h3>44. Maxmimum Number of Column in Oracle?</h3>
+<p>1000 upto 21c IN 23c it was Extended to 4096 
+
+  <p>Alter System Set Max_Columns = Extended;	-- 23c</p>  
+    </p>
+<hr>
+
+<h3>45. Diff bt BTITLE & TTILE?</h3>
+<ul>
+<li>
+    TTITLE 
+    <p>    Print Top of Page 
+        Right side Top Corner will print Page NUMBER
+        Left side Top Corner will print Date and TIME</p> 
+</li>
+</ul> 
+
+ <ul>
+<li>BTITLE    <p>Print Bottom of the Page</p></li>
 
 
+</ul>
 
 
+<hr>
+
+<h3>46. What is Transaction?</h3>
+	<p>List of Statements will be executed between 2 commit points.
+
+        <hr>
+
+<h3>47. What is Constraint?</h3>
+<p>	Enforce Rule on table. | 
+	<p>Applying some set of conditions on data or restriction or Validating on data before storing into the table.
+	
+<li>Data Dictionary</li>
+<li>user_constraints</li>		
+<li>user_cons_columns</li>		
 
 
+<hr>
+
+<h3>48. How to Create Constrain ?</h3>
+<p>	we can create cosntraint at 2 Levels
+<li>At the Time of Creating Table</li>
+<li>After Table Creation.</li>
+
+<hr>
 
 
+<h3>48. Types of Constriant?</h3>
 
+<table>                
+    <thead>
+        <tr>
+            <th>Constarint</th>
+            <th>Duplicates</th>
+            <th>NULL</th>
+			<th> i.e </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Primary KEY</td>
+            <td>X</td>
+            <td>X</td>
+			<td>customer_id, order_id, invoice_id</td>
 
+        </tr>
+        <tr>
+            <td>Unique</td>
+            <td>X</td>
+            <td>Yes</td>
+			<td>email_id, pan</td>
+        </tr>	
+		<tr>
+            <td>Foreign Key</td>
+            <td>Yes</td>
+            <td>Yes</td>
+			<td>department_id</td>
+        </tr>
+		<tr>
+            <td>CHECK</td>
+            <td></td>
 
+        </tr>
+		<tr>
+            <td>NOT NULL</td>
+            <td>100% in Column Level</td>
+
+        </tr>		
+		
+	</tbody>
+	</thread>
+	</table>
 
 
 
