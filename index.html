@@ -699,7 +699,8 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
 <h4> Display all department_names which contains employees?</h4>
 <pre>
 <code>
-SELECT * FROM departments
+SELECT * 
+  FROM departments
 WHERE department_id IN (SELECT department_id FROM employees)
 </code>
 </pre>
@@ -714,8 +715,12 @@ WHERE department_id IN (SELECT department_id FROM employees)
 <pre>
 <code>
 SELECT X.* 
-FROM (SELECT department_id, COUNT(*) dcount FROM employees GROUP BY department_id) X
-  , (SELECT MAX(COUNT(*)) dmcount FROM employees GROUP BY department_id) Y
+  FROM (SELECT department_id, COUNT(*) dcount 
+          FROM employees 
+        GROUP BY department_id) X
+     , (SELECT MAX(COUNT(*)) dmcount 
+          FROM employees 
+        GROUP BY department_id) Y
 WHERE X.dcount = Y.dmcount;
 </code>
 </pre>
@@ -731,9 +736,15 @@ WHERE X.dcount = Y.dmcount;
 <article>
 		<pre>
 		<code>
-		SELECT e.employee_id, e.first_name,e.hire_date,e.salary, e.department_id
-		FROM employees e
-		WHERE e.salary >(SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
+SELECT e.employee_id
+     , e.first_name
+     , e.hire_date
+     , e.salary
+     , e.department_id
+  FROM employees e
+WHERE e.salary >(SELECT AVG(salary) 
+                  FROM employees 
+                WHERE department_id = e.department_id);
 		</code>
 		</pre>
 	</article>	
@@ -831,6 +842,113 @@ WHERE X.dcount = Y.dmcount;
 	Contains Information about Table name, Column name, Datatypes.	-- length of Table Name is 30 maximum 128 bytes
 
 	<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
