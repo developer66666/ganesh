@@ -5,147 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ganesh</title>
     <style>
-        /* Basic styles for demonstration */
-        body {
-            font-family: sans-serif;
-            margin: 20px;
-        }
-        header, footer {
-            background-color: #eee;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 2rem; /* Modern gap property instead of margin */
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
-    margin-bottom: 1.5rem;
-    background-color: #f8f9fa; /* Light background */
-    padding: 1rem 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-nav ul li {
-    position: relative;
-    margin: 0; /* Remove default margin */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #2c3e50; /* Darker color for better contrast */
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    display: block;
-    position: relative;
-}
-
-nav ul li a:hover {
-    color: #3498db; /* Brand color on hover */
-    background-color: rgba(52, 152, 219, 0.1); /* Subtle hover background */
-    transform: translateY(-2px);
-}
-
-nav ul li a:focus {
-    outline: 2px solid #3498db;
-    outline-offset: 2px;
-}
-
-/* Active state styling */
-nav ul li a.active {
-    color: #ffffff;
-    background-color: #3498db;
-}
-
-/* Optional: Add underline animation */
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #3498db;
-    transition: width 0.3s ease;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0;
-    }
-    
-    nav ul li {
-        width: 100%;
-        text-align: center;
-    }
-    
-    nav ul li a {
-        padding: 0.75rem;
-    }
-}
-        section {
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
+        /* Existing styles... */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: white;
             padding: 8px;
-            text-align: left;
+            z-index: 100;
         }
         
-        pre {
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-left: 5px solid #ccc;
-    overflow-x: auto;
-    font-family: 'Courier New', Courier, monospace;
-}
+        .skip-link:focus {
+            top: 0;
+        }
 
-code {
-    color: #2c3e50;
-    display: block;
-    white-space: pre-wrap;
-}
+        nav {
+            margin-bottom: 1.5rem;
+        }
 
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-        
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+        }
+
+        .dropdown-menu a {
+            color: #2c3e50 !important;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f8f9fa;
+            transform: none;
+        }
+
+        /* Caret icon */
+        .dropdown > a::after {
+            content: "▾";
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                display: none;
+                background: #f8f9fa;
+            }
+
+            .dropdown:hover .dropdown-menu,
+            .dropdown:focus-within .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-menu a {
+                padding-left: 2rem;
+            }
+        }
+
+        /* Existing styles... */
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 600;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: block;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #1a5a8a;
+            background-color: rgba(26, 90, 138, 0.1);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:focus {
+            outline: 3px solid #1a5a8a;
+            outline-offset: 3px;
+            background-color: rgba(26, 90, 138, 0.1);
+        }
+
+        nav ul li a.active,
+        nav ul li a[aria-current="page"] {
+            color: #ffffff;
+            background-color: #1a5a8a;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>PL/SQL Interview Questions</h1>
-        <p>SQL, PL/SQL</p>
-    </header>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
-    <nav>
-        <ul>
-            <li><a href="#section1">SQL</a></li>
-            <li><a href="#section2">PL/SQL</a></li>
-            <li><a href="#table_example">Scenario</a></li>
-            <li><a href="#form_example">Others</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="#home" aria-current="page">Home</a></li>
+                
+                <!-- Dropdown menu item -->
+                <li class="dropdown">
+                    <a href="#sql" aria-haspopup="true" aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu" aria-label="sql submenu">
+                        <li><a href="#web">Web Development</a></li>
+                        <li><a href="#mobile">Mobile Apps</a></li>
+                        <li><a href="#cloud">Cloud Solutions</a></li>
+                    </ul>
+                </li>
+
+                
+                <!-- Another dropdown example -->
+                <li class="dropdown">
+                    <a href="#pl/sql" aria-haspopup="true" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu" aria-label="Products submenu">
+                        <li><a href="#software">Software</a></li>
+                        <li><a href="#hardware">Hardware</a></li>
+                        <li><a href="#accessories">Accessories</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
 
@@ -685,9 +715,9 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
 <h4> Who are all getting salary more than Avg salary of the company?</h4>
 <pre>
 <code>
-	SELECT *
-	 FROM employees 
-	WHERE salary > (SELECT AVG(salary) FROM employees); 
+SELECT *
+  FROM employees 
+WHERE salary > (SELECT AVG(salary) FROM employees); 
 	</code>
 </pre>
 <hr>
@@ -970,6 +1000,28 @@ WHERE e.salary >(SELECT AVG(salary)
     <script>
         //You can add javascript here
         console.log("Hello from javascript");
+    </script>
+</body>
+</html>
+
+
+    <script>
+        // Add mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const menu = this.querySelector('.dropdown-menu');
+                        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                        this.querySelector('a').setAttribute('aria-expanded', 
+                            menu.style.display === 'block' ? 'true' : 'false');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
