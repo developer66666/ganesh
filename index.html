@@ -17,20 +17,87 @@
             margin-bottom: 20px;
         }
         nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        nav ul li {
-            margin: 0 10px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /* Modern gap property instead of margin */
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    margin-bottom: 1.5rem;
+    background-color: #f8f9fa; /* Light background */
+    padding: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+nav ul li {
+    position: relative;
+    margin: 0; /* Remove default margin */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #2c3e50; /* Darker color for better contrast */
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: block;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: #3498db; /* Brand color on hover */
+    background-color: rgba(52, 152, 219, 0.1); /* Subtle hover background */
+    transform: translateY(-2px);
+}
+
+nav ul li a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* Active state styling */
+nav ul li a.active {
+    color: #ffffff;
+    background-color: #3498db;
+}
+
+/* Optional: Add underline animation */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+    
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav ul li a {
+        padding: 0.75rem;
+    }
+}
         section {
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -46,31 +113,7 @@
             padding: 8px;
             text-align: left;
         }
-        form {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-        input[type="text"], input[type="email"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        aside {
-            float: right;
-            width: 200px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-left: 20px;
-        }
+        
         pre {
     background-color: #f4f4f4;
     padding: 10px;
@@ -85,6 +128,8 @@ code {
     white-space: pre-wrap;
 }
 
+
+        
     </style>
 </head>
 <body>
@@ -365,78 +410,75 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
   <li>
     Case Manipulation
     <ul>
-      <li><code>UPPER()</code></li>
-      <li><code>LOWER()</code></li>
-      <li><code>INITCAP()</code></li>
-    </ul>
+        <li style="font-size: 16px;"><code>UPPER()</code></li>
+        <li style="font-size: 16px;"><code>LOWER()</code></li>
+        <li style="font-size: 16px;"><code>INITCAP()</code></li>
+      </ul>
   </li>
   <li>
     Character Manipulation
     <ul>
-      <li><code>LENGTH ()</code></li>
-      <li><code>CONCAT()</code></li>
-      <li><code>REVERSE()</code></li>
-      <li><code>SUBSTR()</code> | <code>INSTR()</code></li>
-      <li><code>LPAD()</code> | <code>RPAD()</code></li>
-      <li><code>LTRIM ()</code> | <code>RTRIM()</code></li>
-      <li><code>REPLACE ()</code> | <code>TRANSLATE ()</code></li>
-    </ul>
+        <li style="font-size: 16px;"><code>LENGTH ()</code></li>
+        <li style="font-size: 16px;"><code>CONCAT()</code></li>
+        <li style="font-size: 16px;"><code>REVERSE()</code></li>
+        <li style="font-size: 16px;"><code>SUBSTR()</code> | <code>INSTR()</code></li>
+        <li style="font-size: 16px;"><code>LPAD()</code> | <code>RPAD()</code></li>
+        <li style="font-size: 16px;"><code>LTRIM ()</code> | <code>RTRIM()</code></li>
+        <li style="font-size: 16px;"><code>REPLACE ()</code> | <code>TRANSLATE ()</code></li>
+      </ul>
   </li>
 </ul>
 
 <h3>(ii) Number Function</h3>
 <ul>
-  <li><code>ROUND()</code></li>
-  <li><code>TRUNC()</code></li>
-  <li><code>CEIL()</code></li>
-  <li><code>FLOOR()</code></li>
-  <li><code>MOD()</code></li>
-  <li><code>ABS()</code></li>
-  <li><code>SIGN()</code></li>
-</ul>
-
+    <li style="font-size: 16px;"><code>ROUND()</code></li>
+    <li style="font-size: 16px;"><code>TRUNC()</code></li>
+    <li style="font-size: 16px;"><code>CEIL()</code></li>
+    <li style="font-size: 16px;"><code>FLOOR()</code></li>
+    <li style="font-size: 16px;"><code>MOD()</code></li>
+    <li style="font-size: 16px;"><code>ABS()</code></li>
+    <li style="font-size: 16px;"><code>SIGN()</code></li>
+  </ul>
 <h3>(iii) Date Function</h3>
 <ul>
-  <li><code>MONTHS_BETWEEN ()</code></li>
-  <li><code>ADD_MONTHS()</code></li>
-  <li><code>NEXT_DAY ()</code></li>
-  <li><code>LAST_DAY()</code></li>
-</ul>
+    <li style="font-size: 16px;"><code>MONTHS_BETWEEN ()</code></li>
+    <li style="font-size: 16px;"><code>ADD_MONTHS()</code></li>
+    <li style="font-size: 16px;"><code>NEXT_DAY ()</code></li>
+    <li style="font-size: 16px;"><code>LAST_DAY()</code></li>
+  </ul>
 
 <h3>(iv) Type Conversion</h3>
 <ul>
-  <li><code>TO_CHAR()</code></li>
-  <li><code>TO_NUMBER()</code></li>
-  <li><code>TO_DATE()</code></li>
-  <li><code>TO_TIMESTAMP()</code></li>
-</ul>
+    <li style="font-size: 16px;"><code>TO_CHAR()</code></li>
+    <li style="font-size: 16px;"><code>TO_NUMBER()</code></li>
+    <li style="font-size: 16px;"><code>TO_DATE()</code></li>
+    <li style="font-size: 16px;"><code>TO_TIMESTAMP()</code></li>
+  </ul>
 
 <h3>(v) General Function | NULL Function</h3>
 <ul>
-  -- is to handle NULL values
-  <li><code>NVL()</code></li>
-  <li><code>NVL2()</code></li>
-  <li>
-    <code>NULLIF()</code>
-    <span class="note">-- return null value if 2 expression is same otherwise it return 1st expression.</span>
-  </li>
-  <li>
-    <code>COALESCE()</code>
-    <span class="note">-- print 1st not NULL value</span>
-  </li>
-</ul>
+    <li style="font-size: 16px;"><code>NVL()</code></li>
+    <li style="font-size: 16px;"><code>NVL2()</code></li>
+    <li style="font-size: 16px;">
+      <code>NULLIF()</code>
+      <span class="note">-- return null value if 2 expression is same otherwise it return 1st expression.</span>
+    </li>
+    <li style="font-size: 16px;">
+      <code>COALESCE()</code>
+      <span class="note">-- print 1st not NULL value</span>
+    </li>
+  </ul>
 
 <h3>(2) Group Function | Aggregate Function</h3>
 <ul>
- -- never process NULL values except COUNT(*)
-  <li><code>MIN()</code></li>
-  <li><code>MAX()</code></li>
-  <li><code>SUM()</code></li>
-  <li><code>AVG()</code></li>
-  <li><code>COUNT()</code></li>
-  <li><code>GROUP BY</code></li>
-  <li><code>HAVING</code></li>
-</ul>
+    <li style="font-size: 16px;"><code>MIN()</code></li>
+    <li style="font-size: 16px;"><code>MAX()</code></li>
+    <li style="font-size: 16px;"><code>SUM()</code></li>
+    <li style="font-size: 16px;"><code>AVG()</code></li>
+    <li style="font-size: 16px;"><code>COUNT()</code></li>
+    <li style="font-size: 16px;"><code>GROUP BY</code></li>
+    <li style="font-size: 16px;"><code>HAVING</code></li>
+  </ul>
 
 <hr>
 
@@ -686,7 +728,7 @@ WHERE X.dcount = Y.dmcount;
 	<p>For each row input will be different.</p>
 
 <h4>Display who are all getting salary more than avg salary of their department.</h4>
-
+<article>
 		<pre>
 		<code>
 		SELECT e.employee_id, e.first_name,e.hire_date,e.salary, e.department_id
@@ -694,7 +736,7 @@ WHERE X.dcount = Y.dmcount;
 		WHERE e.salary >(SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
 		</code>
 		</pre>
-		
+	</article>	
 
 <hr>
 
