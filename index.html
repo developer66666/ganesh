@@ -71,6 +71,23 @@
             border: 1px solid #ccc;
             margin-left: 20px;
         }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+
+        pre {
+            background: #f8f9fa;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -672,7 +689,7 @@ WHERE X.dcount = Y.dmcount;
 	<p>For each row input will be different.</p>
 
 <h4>Display who are all getting salary more than avg salary of their department.</h4>
-
+<article>
 		<pre>
 		<code>
 		SELECT e.employee_id, e.first_name,e.hire_date,e.salary, e.department_id
@@ -680,7 +697,7 @@ WHERE X.dcount = Y.dmcount;
 		WHERE e.salary >(SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
 		</code>
 		</pre>
-		
+	</article>	
 
 <hr>
 
