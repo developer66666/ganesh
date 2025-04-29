@@ -178,10 +178,11 @@
     </style>
 </head>
 <body>
-       <center><h1>PL/SQL Interview Questions</h1></center> 
+    <header>
+        <h1>PL/SQL Interview Questions</h1>
+    </header>
 
     <nav>
-        
         <ul>
             <li>
                 <a href="#section1">SQL</a>
@@ -909,85 +910,99 @@ WHERE e.salary >(SELECT AVG(salary)
 	<hr>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h3>42. Diff VARCHAR and CHAR</h3>
+
+    <table>
+                   
+                   <thead>
+                       <tr>
+                           <th>VARCHAR2</th>
+                           <th>CHAR</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>1.VARCHAR2 is variable character length 	</td>
+                           <td>CHAR is a Fixed Character Length</td>
+                       </tr>
+                       <tr>
+                           <td>If you fix the size 30 if u ulitized 10 only 10  will be occupied	</td>
+                           <td>if u fix size 30 and you utilized 10 the whole 30 will be occupied</td>
+   
+                       </tr>
+                       <tr>
+                           <td>3. Default size : 4000 extended 32767 bytes		</td>
+                           <td>Default size is 1 extended 2000</td>
+                       </tr>   
+                      
+                   </tbody>
+                
+               </table>
+<pre>Whenever we compare VARCHAR2 with CHAR we need to TRIM the CHAR value and then we need to compare with VARCHAR2 to get the actual result.
+Always my manager say to use VARCHAR2 instead of CHAR
+For reporting purpose we can use CHAR bcs we dont want to use padding like LPAD, RPAD if we use VARCHAR2 we need to use padding </pre>
+<hr>
+
+<h3>43. Difference between TRUNCATE & DROP & DELETE?</h3>
+
+
+<table>
+                   
+    <thead>
+        <tr>
+            <th>TRUNCATE</th>
+            <th>DROP</th>
+            <th>DELETE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1. DDL Statements</td>
+            <td>DDL Statement</td>
+            <td>DML Statements</td>
+
+        </tr>
+        <tr>
+            <td>2. We Cannot restrict Data</td>
+            <td>We cannot Restrict Data</td>
+            <td>We can restrict Data which we are going to Delete</td>
+
+        </tr>
+        <tr>
+            <td>3. We Cannot use WHERE Clause</td>
+            <td>We cant use WHERE clause</td>
+            <td>We can use WHERE Clause</td>
+            <td></td>
+
+        </tr>   
+            <tr>
+            <td>4. ROLLBACK not Possible</td>
+            <td>Rollback Not Possible</td>
+            <td>We can get the Data (ROLLBACK Possible)</td>
+            <td></td>
+
+        </tr>  
+        
+           <tr>
+            <td>5. Feedback : Table Truncated</td>
+            <td>Table Dropped</td>
+            <td>Feedback : 5 Row(s) Deleted	</td>
+            <td></td>
+
+        </tr>  
+            <tr>
+            <td>6. FAST</td>
+            <td>Fast</td>
+            <td>SLOW-- it will store the deleted data in datafile within tablespace</td>
+            <td></td>
+
+        </tr>  
+        
+    </tbody>
+ 
+</table>
+
+<hr>
 
 
 
