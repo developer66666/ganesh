@@ -116,13 +116,13 @@
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.5rem 0;
-            }
-
+    /* Mobile table adjustments */
+    table {
+        display: block;
+        overflow-x: auto; /* Enables horizontal scrolling */
+        width: 100%;
+        white-space: nowrap; /* Prevents table from breaking into multiple lines */
+    }
             nav ul li {
                 width: 100%;
                 text-align: center;
@@ -616,7 +616,7 @@ Database is a Collection of Oranized data,  stored and accessed from local or re
                 <thead>
                     <tr>
                         <th><center>WHERE Clause</center></th>
-                        <th><center>HAVING Clause<</center>/th>
+                        <th><center>HAVING Clause</center></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1340,6 +1340,18 @@ WHERE original_name LIKE '%TEST_TB%';
 
 <hr>
 
+<h3>71. Sequence Syntax?</h3>
+<pre>
+CREATE SEQUENCE test_seq
+START WITH 1
+MINVALUE 1
+MAXVALUE 9999999.99(27)
+INCREMENT BY 1
+NOCYCLE
+NOCACHE;
+</pre>
+
+<hr>
 
 
 
