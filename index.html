@@ -2275,8 +2275,2281 @@ PARTITION BY HASH (department_id) PARTITIONS 6;
 
 
 
+<h3>162. What is Exchange Partition?</h3>
 
-<h2> <center> *** More Question on the Way... </center></h2>
+<p>Exchange Partition swaps an Existing Table with a Partition.<p>
+
+<hr>
+
+
+<h3>163. When to Partition a Table?</h3>
+
+<li>Table size should be Greater than 2GB.</li>
+<li>We cannot Partition a Table with LONG and RAW Datatypes.</li>
+<li>We can export | import each partition by mention the partition name with Table name.</li>
+<li>Index Creation Possible.</li>
+<li>We can do Partition on Existing Table.</li>
+
+<hr>
+
+<h3>164. What is Cluster?</h3>
+
+<p>Cluster is a Schema Object that Contains data from one or more Tables. 
+<p>Oracle Stores togeather all the rows from the Table that share the same Cluster Key.
+<p>
+<small>	
+When 2 tables freuqently involved in Join Operations it requires some IO operations the data in 2 different memeory location it switch from one memory location to another memory location  it reduce the performance
+<p>Better to Cluster the Tables. the 2 tables data stored in single memory location and increase the performance
+</small>
+
+<p>To Cluster the Tables we need to do 
+
+<ol>
+<li>Create Cluster</li>
+<li>Create Index on CLUSTER</li>
+<li>Create Tables</li>
+</ol>
+
+<hr>
+
+<h3>165. Data Dictionary for Cluster?</h3>
+
+<pre>
+SELECT * FROM user_clusters;
+SELECT * FROM all_clusters;
+</pre>
+
+<hr>
+
+
+<h3>166. Hints?</h3>					
+
+<p>We can Provide instruction to the optimized to choose a certain execution plan
+
+<li>INDEX_ASC</li>
+<li>INDEX_DESC</li>
+<li>INDEX</li>
+<li>NO_INDEX</li>
+<li>ALL_ROWS</li>
+<li>FIRST_ROWS</li>
+<li>APPEND</li>
+<li>PARALLEL</li>
+<li>NOCOPY</li>
+
+<hr>
+
+
+<h3>167. Nocopy hints?</h3>
+
+<p>No_Copy hint allows plsql compiler to Pass IN and Out Parameters by reference rather than by Value.
+
+<ol>
+<li>Pass By Values (default)</li>
+<li>Pass By Reference using no copy.</li>
+</ol>
+
+<hr>
+
+<h3>168. Invisible Column?</h3>
+
+<p>Oracle 12c allows a coulmn to be invisible. 
+<p>Column does not appear in the table or SELECT * FROM query unless explictly referenced by name
+	
+<h4>Advantages</h4>
+<ol>
+<li>Adding Invisible Column does not affect existing SELECT * Query</li>
+<li>Hiding Sensitive data from user who do not need to see</li>
+<li>Creating Virtual Columns that are Invisible by default.</li>
+</ol>
+
+<hr>
+
+
+<h3>169. Virtual Column?</h3>
+
+<p>Vitual Column is a Derived Column in the Table it retrieve the Data from Other Columns.
+<p>It does not store Data Physically, Instead it retrieve the data at Run Time.
+	
+<pre>	
+CREATE TABLE test_tb
+(
+    id NUMBER
+,   name VARCHAR2(30)
+,   salary NUMBER
+,   annual_salary AS (salary*12)
+);
+</pre>
+
+
+</h4> Creating Index on Virtual Column</h4>
+<pre>
+CREATE INDEX test_ind ON test_tb (annual_salary);
+
+SELECT * FROM user_ind_expressions;				-- Column_Expression : salary*12
+
+</pre>
+
+<p> We cannot insert values to Virtual Columns 
+<p> Adding Command to Virtual Column
+<pre>
+COMMENT ON COLUMN test_tb.annual_salary is 'Annual Salary for 1 year only';
+
+SELECT * FROM user_col_comments WHERE table_name = 'TEST_TB';
+</pre>
+
+<hr>
+
+<section id="section2">
+<h2>PL/SQL Interview Questions</h2>
+
+
+<h3>1. PL/SQL ?</h3>
+	
+<p>PL/SQL is a Procedural Language which is Extension to SQL.
+<p>Where we group SQL and PL/SQL statements into single Blocks and send for Execution in a single go.
+	
+<h4>Advantages:</h4>
+<ol>
+<li>Reduce Network Traffic</li>
+<li>Error Handling</li>
+<li>Conditional Checking, Branching and Looping.</li>
+<li>High Performance</li>
+<li>High Productivity</li>
+<li>Portabality</li>
+<li>Scalability</li>
+<li>Managebility</li>
+<li>It Support Object Oriented Programming (OOP s)</li>
+</ol>
+
+<hr>
+
+
+<h3>2. Anonomous Block?</h3>
+
+<pre>
+DECLARE			-- Optional
+BEGIN			-- Mandatory
+EXCEPTION		-- Optional
+END;			-- Mandatory
+/		
+	
+* Unnamed Block 
+* Anonymous Block
+* Not Stored in database 
+* One Time only Procedure
+
+</pre>
+
+<hr>
+
+<h3>3. Diff between %TYPE 	& %ROWTYPE ?</h3>
+<ol>
+<li>%TYPE 	- It is used to declares a variable with the same data type as a table column | Limited to individual columns</li>
+<li>%ROWTYPE	- Declares a record with the same structure as a table row (all columns)used to store 1 row of data</li>
+</ol>
+
+<hr>
+
+<h3>4. Which Column mostly used in where clause for restriction.</h3>
+	
+	Primary Key.
+
+    <hr>
+
+<h3>5. Cusor?</h3>
+
+<li>Cursor is used to Process Multiple Records in PL/SQL.</li>
+<li>When SQL statement is Processed Oracle creates a Temporary Memory area called Context Area (Private Area)</li>
+<li>Cursor is Pointing to that Area Where the Query get Passed and Executed</li>
+<li>Cursor contains information on SELECT statement and row of data accessed by it.</li>
+<li>The set of rows that cursor hold is called Active Set.</li>
+	
+<br>
+
+<i>--exact fetch returns more than requested number of rows</i>
+
+<hr>
+
+
+<h3>6. Types of Cursor?</h3>
+<ol>
+<li>Implicit Cursor</li>
+<li>Explicit Cursor</li>
+</ol>
+
+<hr>
+
+<h3>7. Cursor Process?</h3>
+
+<p>To Fetch more Multiple records.
+<li>In DECLARE block we need to declare the cursor, Cursor cusrsor_name IS SELECT query</li>
+<li>In BEGIN block we need to open the cursor, IN LOOP Fetch the cursor INTO variable_name.</li>
+<li>Fetch till the Cursor NOTFOUND (Exit Condition).</li>
+<li>Close the Cursor.</li> 
+
+<hr>
+
+<h3>8. Implicit Cursor?</h3>
+
+<li>If a query returns exactly one row </li>
+<li>No need to declare the cursore it implicitly declared by PL/SQL Engine.</li>
+<li>Default Name : SQL</li>
+
+<hr>
+
+
+<h3>9. Explicit Cursor?</h3>
+
+<li>If a Query returns more than one row </li>
+<li>We need to declare and Name it.</li>
+
+<hr>
+
+
+<h3>10. Cursor Attributes?</h3>
+
+<li>%FOUND</li>
+<li>%NOTFOUND</li>
+<li>%ISOPEN</li>
+<li>%ROWCOUNT</li>
+<li>%BULK_ROWCOUNT</li>
+<li>%BULK_EXCEPTIONS</li>
+	
+		
+<p>CURSOR LOOP
+<p>CURSOR FOR LOOP
+<p>Parameterized CURSOR
+<p>FOR UPDATE OF 			-- LOCK
+<p>WHERE CURRENT OF 		-- Identify Currently processing row inside the CURSOR
+<p>NO WAIT					-- Tell other Session not to wait if the first session to complete.
+
+<hr>
+
+<h3>11. Inline Cursor?</h3>
+
+<p>Cursor declared within FOR LOOP is called as inline cursor.
+	
+<h4>Advantages:</h4>
+<p>No need to declare CURSOR seperately, within FOR LOOP we can declare cursor.
+		
+<hr>
+
+
+
+<h3>12. What is Parameterized Cursor?</h3>
+	
+<p>Parameterized Cursor is an Explicit Cursor can Pass Parameter value when the Cursor is Opened.
+<p>Parameterized Cursor Pass the Parameter into Cursor and us them in query.
+
+<hr>
+
+<h3>13. What is 'FOR UPDATE OF' ?</h3>
+
+<p>FOR UPDATE OF statement allows you to Lock record in the Cursor result set
+<p>The Lock will release when next commit or rollback.
+
+<hr>
+
+
+<h3>14. What is 'WHERE CURRENT OF' ?</h3>
+
+<p>Identify the record currently processing by CURSOR
+<p>WHERE CURRENT OF statement allow you to you to update or delete the record that was last fetched by CURSOR.
+
+<hr>
+
+<h3>15. What is 'NOWAIT' ?</h3>
+
+<p>Telling other Sessions not to wait for the first session to complete.
+
+<hr>
+
+<h3>16. Exception?</h3>
+
+<p>Exeption is a warning condition occured during execution of program. Which can be Pre-define or user_defined.
+
+<hr>
+
+<h3>17. Error Types?</h3>
+
+<ol>
+<li>Run Time Error - Input Error</li>
+<li>Compilation Error - Syntax Error</li>
+</ol>
+
+<hr>
+
+<h3>18. Types of Exception</h3> 
+
+<ol>
+<li>Pre_defined EXCEPTION</li>
+<li>User defined EXCEPTION</li>
+<li>Application Error			-- RAISE_APLLICATION_ERROR();</li>
+<li>PRAGMA EXCEPTION_INIT		-- used to name the unnamed errors in oracle.</li>
+</ol>
+	
+<hr>
+
+
+
+<h3>19. Error Range?</h3>
+
+<pre>
+	    0   to -19999 - Oracle Error RANGE
+	-20000 to -20999 - User Define Error Range | RAISE_APLLICATION_ERROR
+</pre>		
+
+<hr>
+
+		
+<h3>20. Pre Defined Exception?</h3>
+	
+<p>Pre-define Exceptions are raised implicitly by oracle at run time.
+	
+<li>ZERO_devide</li>
+<li>no_data_found</li>
+<li>too_many_rows</li>
+<li>value_error</li>
+<li>cursor_already_open</li>
+<li>invalid_cursor</li>
+<li>dup_val_on_index</li>
+<li>case_not_found</li>
+<li>invalid_number</li>
+<li>OTHERS			-- 100% | must handle in last</li>
+
+<hr> 
+
+<h3>21. What are all the steps involved in User defined Exception.</h3>
+
+<ol>
+<li>Declaring EXCEPTION</li>
+<li>In BEGIN block RAISE exception_name</li>
+<li>In Exception block WHEN exception THEN..</li>
+</ol>
+
+<hr>
+
+
+<h3>22. How will you raise user defined exception in oracle.</h3>
+	
+<p>RAISE exception_ex
+
+<hr>
+
+<h3>23. How will you find what error happended in Others Part?</h3>
+
+<p>SQLERRM , SQLCODE.
+
+<h4>Diff between differnce between </h4>
+<pre>
+SQLCODE -- Traditional error handling method its gives only oracle error code
+SQLERRM -- Traditional error handling method its gives only oracle error code and error msg
+dbms_utility.format_error_stack	-- it gives error code and error message
+dbms_utility.format_error_backtrace -- it gives error code and error in which line 
+</pre>
+
+<hr>
+
+
+<h3>24. How will you TRAP Errors in PLSQL Block.</h3>
+	
+<p>using Exception part
+
+<hr>
+
+<h3>25. What will happen if we handled OTHERS exception before other Exceptions.</h3>
+
+<p>Compilation Error.
+
+<hr>
+	
+<h3>26. What is a use of PRAGMA EXCEPTION_INIT?</h3>
+
+<p>used to name unnamed Exception
+
+<hr>
+
+<h3>27. PRAGMA Means?</h3>
+<p>PRAGMA is a Compiler directive that allow you to provide additional information to the compiler.
+
+<hr>
+
+<h3>28. How will you pass error message to Front end Developer / User.</h3>
+	
+<p>OUT parameter.
+
+<hr>
+
+	
+<h3>29. How to find which line has error in plsql program.</h3>
+
+<li>DBMS_UTILITY.format_error_stack				-- error code , error message</li>
+<li>DBMS_UTILITY.format_error_backtrace			--error code, in which line</li>
+
+<hr>
+
+
+<h3>30. How you used Error Log Table?</h3>
+
+<p>To store the Error message in Tables.
+
+<hr>
+		
+<h3>31. Stored Procedure?</h3>
+
+<ol>
+<li>It is a Named PL/SQL sub Program which is compiled and stored in database for repeated usage.</li>
+<li>Procedure perform an Action</li>
+<li>Used to Implement Business Logics</li>
+<li>Procedure may or may not return any value.</li>
+<li>It is a Schema Object.</li>
+</ol>
+
+<hr>
+
+<h3>32. Data Dict TABLE</h3>
+
+<li>user_procedures</li>
+<li>user_errors			(text)</li>
+<li>user_source			(text)</li>
+
+<hr>
+	
+<h3>33. Parameter Mode</h3>
+
+<li>IN		-- call by VALUE</li>
+<li>OUT		-- call by reference </li>
+<li>IN OUT	-- call by reference</li>
+
+<hr>
+
+<h3>34. How to Execute Procedure?</h3>
+
+<pre>
+EXECUTE test_sp;   ||   EXEC test_sp;
+
+BEGIN
+test_sp;
+END;
+/
+</pre>
+
+<hr>
+
+
+<h3>35. What is Procedure Overloading?</h3>
+
+<p>If Multiple Procedure with Same name but the 
+<li>Number of Parameter</li>
+<li>Order of Parameter</li>
+<li>order of data type </li>
+<p>should be different.
+
+<hr>
+	
+<h3>36. Parameter Notations?</h3>
+<pre>
+BEGIN 
+  test_sp (10,20,30);				-- Unnamed Notation
+  test_sp (p_a => 10, p_b => 20, p_c => 30);	-- Named Notation
+  test_sp (       10, p_b => 20, p_c => 30);	-- Mixed Notation
+  test_sp (       10, p_b => 20,        30);	-- Error 
+END;
+/
+</pre>
+
+<hr>
+
+<h3>37. What is Local Procedure?</h3>
+<p>Procedure declared inside another plsql block.
+<p>Local Procedure can call only with in the Particular Block.
+
+<hr>
+
+<h3>38. PRAGMA Autonomous_Transaction?</h3>
+
+<li>It will make that Transaction Independent</li>
+<li>It is Execute without dependency of other Transaction</li>
+<li>if a Sub program can commit or rollback its own transaction it doesnt affect main transaction</li>
+<li>We have to use PRAGMA AUTONOMOUS_TRANSACTION we must use COMMIT</li>  
+<li>PRAGMA is a KEYword and AUTONOMOUS_TRANSACTION is Independent Event.</li>
+
+<hr>
+	
+<h3>39. How to Recompile Procedure?</h3>
+	
+<p>Alter PROCEDURE test_sp COMPILE;
+
+<hr>
+
+<h3>40. How to Drop Procedure?</h3>
+
+<p>DROP PROCEDURE test_sp;
+
+
+<hr>
+
+
+<h3>41. Parameter List.</h3>
+
+<li>Passing Parameter is equal to Declaration</li>
+<li>Default IN MODE</li>
+<li>IN Mode Parameters are READ only.</li>
+<li>No need to mention size of Parameter. </li>
+
+<hr>
+
+
+<h3>42. DDL inside the Sub Program in Procedure</h3>
+	
+<p>No 
+<p>Yes - Using Execute Immediately
+
+<hr>
+
+
+<h3>43. What is Standalone Procedure / Function ?</h3>
+
+<p>Any Stored Procedure or Stored Function was Created Invidually using CREATE OR REPLACE PROCEDURE / FUNCTION </p>
+
+<table>
+<tr>
+
+	<th><center>Stored Procedure</center> </th>
+	<th><center>Stored Function</center></th>
+</tr>
+<tbody>
+	<tr>
+		<td>1. Stored Procedure optinally Return a Value using OUT, IN OUT Parameter</td>
+		<td>Function must return a Value</td>
+	</tr>
+	<tr>
+		<td>2. Perform DML Operation </td>
+		<td>Can use Pragma Autonomous Transaction</td>
+	</tr>
+	<tr>
+		<td>3. Can use DDL statements</td>
+		<td>cannot use DDL statements directly (Execute Immediate)</td>
+	</tr>
+	<tr>
+		<td>4. Can use Stored Function inside procedure	</td>
+		<td>Can use but that Stored Procedure doent Perform any DML operations(use Pragma Auto..)</td>
+	</tr>
+	<tr>
+		<td>5. We can Execute using Execute Statement</td>
+		<td>Execute using SELECT statement</td>
+	</tr>
+</tbody>
+</table>
+	
+
+<hr>
+
+	
+	
+<h3>44. Stored Function?</h3>
+
+<p>It is a named PL/SQL Program
+<p>Which is Compiled and Stored in Database for repeated usage.
+<p>Function must return one VALUE
+<p>It is a Schema Object.
+
+<hr>
+
+
+<h3>45. Is it Possible to do DML inside the Function?</h3>
+
+<p>Yes | PRAGMA AUTONOMOUS_TRANSACTION;
+
+
+<hr>
+
+
+<h3>46. Is it Posiible to do DDL inside the Function?</h3>
+
+<p>Yes | PRAGMA AUTONOMOUS_TRANSACTION and using Dynamic SQL (Execute Immediate);
+
+<hr>
+
+
+<h3>47. IS it Possible to Return more than one Value using Function?</h3>
+
+<p>Yes by using OUT Parameter (but we cant Except it in SQL) | REF_CURSOR.
+
+<hr>
+
+
+<h3>48. IS it Possible to have More than one Return statement inside the Function?
+
+<pre>
+
+Return 1;
+ --Return 2;
+ --Return 3;
+</pre>
+
+<hr>
+
+
+<h3>49. Is it Possible to call Procedure Inside the Function?</h3>
+
+<p>we cannot direclty call a procedure inside function bcs function always return a value, Procedure doesnt
+
+<p>YES | PRAGMA AUTONOMOUS_TRANSACTION
+	
+
+<hr>
+
+<h3>50. What is Package?</h3>
+<ol>
+<li>We can Group Logical Related Procedure & Function.</li>
+<li>It Consist of two Parts</li>
+<ul>
+<li>Specification (Spec)</li>
+<li>BODY</li>
+</ul>
+<li>It allow the Oracle Server to Read Mutiple Object in to a Memory ones (User Memory).</li>	
+<li>You can Declare Global variable, Cursor, User Define Exception in Package specification</li> 
+</ol>
+<hr>
+
+
+<h3>51. Advantages of Package?</h3>
+<li>Maintatance will be Easy</li>
+<li>Performance ( if you Try to Execute any Sub Program in package other Sub Program will be Loaded in User Memory).</li>
+<li>We can Declare Global variable, Cursor, Exception.</li>
+<li>Overloading of Subprogram (We can Create Multiple sub program with same Name within the Package).</li>
+<li>Reuse object(i.e Procedure) name cross the Package. </li>
+
+
+
+<hr>
+
+	
+<h3>52. How to Create Package?</h3>
+<p>CREATE OR REPLACE PACKAGE..
+
+<hr>
+
+	
+<h3>53. How to Execute Procedure or Function inside Package?</h3>
+<pre>
+EXEC package_name.procedure_sp		-- Procedure
+SELECT package_name.test_fn FROM dual;	-- Function
+</pre>
+<hr>
+
+	
+<h3>54. Diff Parts of Package?</h3>
+	
+<p>1. Specification (Spec)
+<p>2. BODY
+
+<hr>
+
+
+<h3>55. How to DROP Package Body Part?</h3>
+
+<pre>
+DROP PACKAGE BODY calc_pkg;		-- It will Drop only Body Part in Package Specification part will remain
+	
+DROP PACKAGE calc_pck;			-- It will Drop both Specification Part & Body Part
+</pre>
+<hr>
+
+
+<h3>56. How to Recompile Package?</h3>
+	
+<p>ALTER PACKAGE calc_pkg COMPILE;
+
+
+<hr>
+
+
+<h3>57. What is Forward Declaration in Package?</h3>			
+	
+	Declaration of Sub program in the Package Body before writing its Code.
+	(calling the subprogram Before the subprogram declaration).
+
+<hr>
+
+
+<h3>58. What is Bodyless Package?</h3>
+	
+	Package without Body Part.
+
+<hr>
+
+
+<h3>59. What is Package Overloading?</h3>
+
+	Package Support Overloading 
+	In Package we can define 2 or more Procedures or Function with Same Name with Different Parameters.
+
+<hr>
+
+
+
+<h3>60. Is it Possible to have the Sub Program which is not given in Specification Part?</h3>
+
+	No. We should Declare the Sub Program in Specification Part.
+
+<hr>
+
+
+<h3>61. Why we have to Go for Package?</h3>
+
+	If Procedure and Functions are Logically Related we make it as Package.
+	It is easy to Main.
+
+<hr>
+
+	
+<h3>62. How to Execute Package?</h3>
+
+<p> We need to Mention Package Name as Prefix.
+
+<pre> 
+BEGIN
+	Calc_pck.add_sp(10,20);
+END;
+ /
+</pre>
+
+<hr>
+
+
+<h3>63. Can we have 5 Sub Program in Specification Part and 2 in Body Part.</h3>
+
+	Not Possible  	-- Body Part Created compiled with Compilation error |   Status will be in INVALID ( all_objects)
+
+<hr>
+
+	
+<h3>64. Can we have 2 Sub Program in Specification Part and 5 in Body Part.</h3>
+
+	Possible			-- only declared sub program is public accessible other 2 is PRIVATE can access only within package
+
+
+<hr>
+
+
+<h3>65. What is Packaged Procedure ?</h3>
+	
+	Any Procedure Written inside the Package Body is called Packaged Procedure.
+	
+
+<hr>
+
+
+
+<h3>66. What is Packaged Function?</h3>
+	
+	Any Function Written inside the Package Body is called Packaged Function.
+
+<hr>
+
+
+<h3>67. What is Packaged Subprograms?</h3>
+	
+	Any Procedure / Function Written inside the Package Body is called Packaged Subprograms.
+
+<hr>
+
+
+<h3>68. What is Public Procedure?</h3>
+
+	Any Procedure Declared in Specification Part and also Body part is Called Public Procedure.
+
+<hr>
+
+
+<h3>69. What is Private Procedure ?</h3>
+
+	Any Procedure is Declared only in Package Body.
+
+<hr>
+
+	
+<h3>70. One Time Only procedure?</h3>
+
+	One Time Only Procedure or Initilization Block.
+
+<hr>
+
+	
+<h3>71. Trigger?</h3>
+
+<p>Trigger is a PL/SQL Sub Program which is Associated with Table, Schema and Database.
+<p>It is a Schema Object 
+<p>We cant Execute Trigger, It fires implicitly whenever the Event Take Place.
+<p>It is High Level Constraint 
+
+<hr>
+
+
+<h3>72. Trigger Types?</h3>
+<p>1. Statement Level Trigger 
+<p>2. Row Level Trigger 
+
+<hr>
+
+
+<h3>73. Trigger Event?</h3>
+
+<p>INSERT
+<p>UPDATE
+<p>DELETE
+
+<hr>
+
+
+<h3>74. Trigger Timing </h3>
+
+<p>BEFORE
+<p>AFTER
+<p>INSTEAD OF
+
+<hr>
+
+
+<h3>75. Statement Level Trigger </h3>
+
+<p>Default Trigger 
+<p>It Fires for Each Event 
+<p>It Fires Even No rows are Affected
+
+<hr>
+
+
+<h3>76. Row Level Trigger </h3>
+
+<p>It Fires for Each Row 
+<p>We can use :new and :old reference Value 
+<p>It wont Fire if No rows are Affected
+
+<hr>
+
+
+<h3>77. Maxmimum no of Trigger on particular Table?</h3>
+
+	<p>12
+<p><i>-- we can order the trigger which should fire first and other later (Execution order of Triggers )
+</i>
+<hr>
+
+
+<h3>78. 12C New Feature of Trigger Follows?</h3>
+	
+	Follows
+
+<hr>
+
+
+<h3>79. Enable / Diable Trigger?</h3>
+<pre>
+	ALTER TRIGGER test_trg ENABLE;
+	ALTER TRIGGER test_trg DISABLE;
+</pre>
+<hr>
+
+
+<h3>80. How to Disable all Triggers related to Particular Table?</h3>
+<pre>
+	ALTER TABLE table_name DISABLE ALL TRIGGERS; 
+</pre>
+<hr>
+
+
+<h3>81. Is it Possible to COMMIT inside Trigger?</h3>
+
+	No. yes when using Pragma Autonomous Transaction 
+	
+	
+<h4>-- if table is droped what happen to Trigger?
+
+	Trigger also get dropped.
+
+
+<hr>
+
+	
+<h3>82. Compound Trigger?	</h3>
+
+	Compound Trigger allows Multiple Trigger Events to be handle within Single Trigger 
+
+<hr>
+
+	
+<h3>83. Mutating Table Error?</h3>
+
+	When trigger tries to modify the same table that triggered it.
+
+<hr>
+
+	
+
+<h3>84. What is Bulk Collect?</h3>
+	
+<p>In a Single fetch it collect multiple row of data store into collection.
+<p>It reduce the context switch between sql and plsql engine.
+
+<hr>
+
+
+<h3>85. What is Bulk Bind?</h3>
+	
+<p>Insted of executing DML operation for each row
+<p>Bulk Bind perform multiple DML operation at once and reduce context switch and improve performnce
+
+<hr>
+
+
+<h3>86. What is Bulk Limit?</h3>
+	
+<p>When fetching large volume of data using bulk collect it may affect the performance and utilize the Memory
+<p>To balance the performance and memeory we use bulk  limit 
+<p>To limit the number of rows fetching by bulk collect
+<p>Process will continue until all rows fetched 
+
+<hr>
+
+
+<h3>87. What is Bulk Exception?</h3>
+	
+	To handle the Exception during Bulk operation 
+
+<hr>
+
+
+<h3>88. Where you use Bulk Collect in your Project?</h3>
+	Large Volumne of Data used in  UTL Report 
+
+<hr>
+
+
+<h3>89. Bulk Collect Performance is Low what you do?</h3>
+
+	Use Limit instead of Fetching all record we can limit each time to improve performance.
+
+<hr>
+
+
+<h3>90. Diff b/w Records and %ROWTYPE?</h3>
+
+<h4><u>%ROWTYPE</u></h4>
+<p>In %ROWTYPE we need to Mention all Columns OR we can use * (cannot use few columns)
+<p>Multiple Table Data cannot store.
+	
+<h4><u>RECORDS</u></h4>
+<p>In RECORDS we no need to mention all Columns.
+<p>We can Store Multiple Table Data 
+
+<hr>
+
+
+<h3>91. Diff b/w Nested Table and Varray ?</h3>
+
+<p>In Nested Table there is no Limitations to Store DATA
+<p>In Varray there is Limitations like i.e VARRAY(30) we can use only 30  records mentioned in varray.
+
+<hr>
+
+
+<h3>92. Diff Between FOR and FORALL</h3>
+
+<p>For 	- Loop 		( to process data one by one)
+<p>FORALL  - Statement (use in Bulk Collect to Process Data in a Single go)
+
+<hr>
+
+
+<h3>93. Collection?</h3>
+
+<p>Collection is a datatype that allow to store multiple values in a Single Variable 	
+<p>Declare Collection by Using Type Definition.
+
+<hr>
+
+
+<h3>94. Collection Types?</h3>
+<ol>
+<li>Index By Table / Associative Array / PLSQL Table</li>
+<li>Nested TABLE</li>
+<li>Varray </li>
+<li>Records</li>
+</ol>
+<hr>
+
+
+<h3>95. Collection Methods</h3>
+
+	FIRST LAST COUNT EXTEND TRIM DELETE
+
+<hr>
+
+
+<h3>96. Dynamic SQL</h3>
+
+<p>Dynamic SQL used to build SQL Statements at runtime. 
+<p>It is usefull If we dont know the full text of SQL statements at compilation time we know the full text of SQL statements at runtime.
+
+
+<hr>
+
+
+
+
+
+273. Performance Tuning?
+
+	1. Query Tuning 
+	2. PLSQL Block Tuning
+
+
+	Optimizer is bulit in database software to process the SQL statement in efficient method.
+	It uses avilable statistics to calculate the cost of difference execution plan and choose the lowest cost.
+	
+	There are 2 types of optimizer 
+	
+	1. RBO - Rule Based Optimizer 
+	2. CBO - Cost Based Optimizer 
+
+	RBO - uses a set of predefined rules for execution (until oracle 9i uses RBO)
+	CBO - uses statistics of data and system resources and estimate the cost of each plan and choose the best plan.
+	
+	Oracle strongly advice to use CBO bcs it is more flexible and apdative than RBO.
+	
+	
+	* Explain PLAN
+	* Access Method
+	* Join Method
+	* Query Process
+	* INDEX
+	* dbms_stats_gathering
+	* Query Rewriting
+	* Table PARTITION
+
+274. DBMS_PROFILER
+
+		Package Provided by Oracle to capture the Information about PLSQL Code Execution at Runtime and stored in a Table.
+		We can Analyse the Information to find which particular Line is Taking More Time for execution
+		
+		We can get Information about 
+		1. Total Number of Times each Line is Executed 
+		2. Total Amount of Time Taken for Execution
+		3. Minimum & Maximum Times taken to Execute on Particular Line.
+		
+275. Profiler Execution
+
+	START Profiler ( execute dbms_profiler.start_profiler())
+	
+	PL/SQL Block
+	
+	STOP Profiler	(execute dbms_profiler.stop_profiler())
+
+276. OPTIMIZE PLSQL
+
+	1. Using inbuilt function 'Analytical Function'
+	2. Use Bulk COLLECT
+	3. Use GTT
+	4. Use Pass By Reference (No Copy compiler HINT)
+	5. Merge Multiple statments into Single Statment whenever possible
+	6. Use  HINT
+	7. FORALL
+
+
+277. Ref_Cursor
+
+	Ref_Cursor is a Data Type used to store a cursor reference in a PL/SQL Block.
+	It is a Type of data that refer to a cursor where the memory area that stored the result of query
+
+	Types
+	-----
+	1. Strong REF_CURSOR
+	2. Weak REF_CURSOR
+	2. SYS_REFCURSOR
+
+
+278. Table Function?
+
+	Table Function is a user define PLSQL function that returns a collection of rows (an associated array, nested table or varray)
+
+	1. Function that return collections can be used in SQL queries beaves like relational table.
+	2. Table function need to be fully populated by the function before returned as output.
+	3. Table is Mandatory for oracle version bleow 12c.
+	
+-- PIPELINED Function
+
+Pipelined Function return the value as and when the value is ready to send back caller
+
+
+	
+279. UTL_FILE
+
+	UTL_FILE Package in the Oracle database is used to write/read data to text File on the server. 
+	used for reporting, import and export and other file handling
+	we used weekly reports (non graphical reports).
+
+280. Normalization
+
+	* Normalization is the Process of Oraganizing Data in the Database.
+	* Normalization is a technique to reduce data redundancy(repeated data) and enhance data integrity.
+	* Normalization divide large table into smaller table and link them using relationship.
+	
+	List of Normalization
+	---------------------
+	1NF - First Normal Form		-- Each Table should be Single Value, Each Record Should be Unique
+	2NF - Second Normal Form	-- Non Key Column dependent on Key Column i.e department_name, manager_id, location_id dependent on employees table department_id.
+	3NF - Third Normal Form		-- Non Key Column dependent on Non Key Column i.e street_address, postal_code, city, country_id dependent on departments table location_id
+	BCNF - Boyce-Codd Normal Form
+	4NF - Fourth Normal Form
+	5NF - Fifth Normal Form
+	6NF - Sixth Normal Form
+
+
+282. DEAD_LOCK
+
+	When Two Sessions mutually waiting for each other dead lock will occur.
+
+283. DBMS_XMLGEN
+
+	DBMS_XMLGEN package converts the result of a SQL query to a Canonical XML Format. 
+	The package takes SQL Query as Input, COnverts it into XML FOrmat and return the result as a CLOB.
+	DBMS_XMLGEN is especially useful for applications that need XML for web services, reporting, or exporting data.
+	
+	DBMS_XMLGEN package must be created by SYS and Execute Previlege is granted to Public.
+
+284. DBMS_UTILITY
+
+	DBMS_UTILITY is a Oracle Supplied Package which is collection of stand alone procedures and function which are used for various purpose.
+	
+	
+	1.DBMS_UTILITY.FORMAT_ERROR_BACKTRACE
+	
+		We can Extrack Error Line NUMBER
+
+285. Stats Gathering?
+
+	If DML operation is performed frequently in a Table Oracle Automatically Gather Statistics for that Table
+	If the Table is Not Performed any DML Operations  frequently we can gather statistics to improve the performance.
+	
+	
+	Stats gatherering is the process of collection information about the data in the database
+	This information is used by the Optimizer to choose best execution plan.
+	
+	
+	We can gather statistics for 
+	1. Entire DATABASE
+	2. Schema
+	3. TABLE
+	4. Index 
+
+
+286. DBMS_SCHEDULER
+
+	DBMS_SCHEDULER is a package in Oracle that Provides collection of Scheduling Procedure and Function that can be called from any PL/SQL Program.
+	It can be used to Create, Run and Manage Jobs with Oracle Scheduler.
+	It was introduced in 10g
+
+287. How to debug PLSQL Code?
+
+	1. Using DBMS_OUTPUT package 	
+	 	dbms_output.put_line('Start1');
+	2. Using Exception 		
+		WHEN others THEN 
+			dbms_output.put_line('Error :' || SQLERRM);
+	
+
+288. CAST Function?
+
+	Cast Function converts one data_type to another data_type.
+
+289. What is Batch | Batch_Jobs?
+
+	Procedure without Front End is Called Batch or batch_Jobs
+
+290. What is Job Scheduling Tool.
+
+	Job Scheduling Tool use this Batch.
+	
+291. What is AutoSYS?
+		
+	Autosys is an Automated Job Control System for Scheduling, Monitoring, and Reporting Jobs.
+
+292. Have you Scheduled Job in Auto-SYS?
+	
+		No i Just only Monitoring.
+
+293. What is Variable?
+		Variable is used to store values temporarly during execution.
+		
+294. Types of Variable?
+	1. Scalar variable
+	2. Composite VARIABLE | Collections 
+	3. Reference Variable | Ref_cursor
+	4. Lob - Large Object
+	
+295. Types of errors in Anonymous Block?
+
+296. DML Operation done in PL/SQL Block what to do?
+297. Use of GOTO & EXIT & Continue &Return?
+298. Purpose of using PL/SQL? -- overcome limitation of SQL
+299. What is PL/SQL Tables?
+300. Diff between global variable and Local Variable?
+	
+	Global Variable can be accessed Entire Program
+	Local Variable can be accessed with in the Block.
+
+301. What is ROWNUM?
+
+	Generate Unique Number at the Runtime
+	Get Generated before the Execution of ORDER BY clause.
+	- - - - - - - - - - -
+	It will generate the ROWNUM sequncely like 1,2,3,4,5 
+	We cant directly get 5(Generate ROWNUM <=5 In Outer query we can rectrict as 5)
+
+302. Data Pump ?
+
+	Transfer data between 2 Oracle Database.
+	Data Pump is an Extension of Tradional import/export which gives Security and Speed.
+	
+303. Unused COlumn?
+
+	To mark columns as unused. 
+	Unused columns are not physically dropped, but are treated as they were dropped. 
+	Unused columns can not be restored. 
+	cannot retrieve the data using SELECT clause | DESC column 
+
+304. ACID Properties?
+
+	ACID - Atomicity Consistency Isolation Durability 
+	
+	Atomicity   -  100 records starts updating fail at 20th record it do roll back for that 20 records.
+	Consistancy - 
+	Isolation   - If 1 user updating the table another user cant see those changes until user 1 COMMIT
+	Durability  - Commited transactions are permanent 
+
+305. Access Methods?
+
+306. Join Methods In Performance Tuning?
+
+307. Is Index working when u fetch 60% records in a Table?
+
+308. U have 1000 records in a Table and need to update records what happen if u goes FOR LOOP and Bulk Collect?
+
+309. What is context Switch?
+
+310. What will you do Error Happening in CURSOR?
+	Declare the Exception 
+	In Exception part we handle the exception using SQLERRM
+
+311. What is Additional Program in PLSQL Block?
+
+312. What is BCT?
+
+313. White Box Testing and Black Box Testing?
+
+314. What are the Subset of SQL?
+
+315. What are the Applications of SQL?
+
+316. What are the 3rd Party tools used in SQL Server?
+
+	SQL CHECK
+	SQL Doc 2
+	SQL Backup
+	SQL Prompt
+	Litespeed 5
+	
+317. Diff between Candidate Key and Composite Key?
+
+318. What is a DEFAULT constraint?
+	
+	Default Value for a Column 
+		
+	CREATE TABLE test_tb(id NUMBER
+					   , name VARCHAR2(30)
+					   , age NUMBER DEFAULT 18);
+
+319. What are the Advantages and Disadvantages of Triggers in SQL?
+
+320. What is DML Trigger in SQL? What is the application of DML Triggers?
+
+321. What is the difference between Recursive Trigger and Nested Trigger in SQL?
+
+322. What are the MAGIC TABLES in SQL? What is the use of INSERTED and DELETED tables in SQL?
+
+
+323. Table Lock?
+
+	Table lock is Placed in Table to Prevent concurrent access of another Transaction.
+	
+	1. Implicit Lock
+	2. Explicit Lock	-- user define Lock (Update)
+	
+	-- Implicit Lock
+	1. Shared Lock	(Read Lock)		-- Allow Read Not aloow Insert, Update 
+	2. Exclusive Lock (Write Lock)	-- only 1 transaction update or modify 
+
+324. Front End developer will call the Procedure?
+
+	 RPC - Remote Procedure Call
+
+325. Can we use Return keyword in Stored Procedure?
+
+	Yes we can use it will exit from the program
+	But in Function it will return value.
+	
+326. Can we compile Stored Function without Return Keyword?
+
+	Yes we can compile but we cannot call in select statement 	-- error ( function returned without a value )
+	
+327. How to identify the Stored Function without Return Keyword?
+
+	1. Call function in Select Statement 
+	2. From User_source || text column we can analyze 
+	3. 
+
+328. Execute Package?
+
+#1
+
+BEGIN
+	Calc_pkg.add_sp(10,20);
+END;
+/
+
+#2 
+
+SQL> call calc_pkg.add_sp(10,20);
+30
+
+#3
+
+SELECT Calc_pkg.add_fn(10,20) FROM dual;		-- only function can use in SELECT stmt
+
+
+329. AWR report?
+	The Automatic Workload Repository (AWR) in Oracle is a database feature 
+	that collects and maintains performance statistics, including resource usage, wait events, 
+	and SQL statements, for analysis. AWR reports provide insights into database performance over time, 
+	helping database administrators diagnose issues and optimize performance.
+
+330. Difference between cursor and Refcursor?
+
+331. difference between local and global index
+
+Local Index: Created on a partitioned table, each partition has its own index, 
+			suitable for large partitioned tables for efficient management and query optimization.
+
+Global Index: Created on a non-partitioned table, spans the entire table, s
+uitable for small to medium-sized tables where the entire index can be 
+efficiently managed as a single structure.
+
+332. what is call by value and call by reference
+
+Call by Value: Copies the value of the parameter into the function or procedure, 
+				changes made inside the function or procedure do not affect the original value.
+
+Call by Reference: Passes the memory address of the parameter into the function or procedure, 
+					changes made inside the function or procedure affect the original value.
+
+333. Mutating trigger?
+
+	mutating trigger in Oracle occurs when a trigger tries to access the same table that caused 
+	the trigger to fire.
+	
+	To avoid we can use Temporary Table
+	
+334. One refcursor value can be passed to other refcursor value
+	Yes 
+
+335.cursor can be passed as a parameter in procedure
+
+	yes. 
+
+336. Diff between rank,dense_rank,row_number?
+
+337. collections and bulkcollect?
+
+338. oracle packages
+
+339. cursor and sysrefcursor
+
+Cursor: A named private SQL area used to parse and execute SQL statements within PL/SQL code.
+
+SYS_REFCURSOR (Ref Cursor): A special data type in Oracle used as a pointer or reference to a result set, 
+	providing flexibility for passing result sets between PL/SQL code and client applications.
+
+340. stats_gather
+
+If DML operation is performed frequently in a Table Oracle Automatically Gather Statistics for that Table
+If the Table is Not Performed any DML Operations  frequently we can gather statistics to improve the performance.
+
+Stats gatherering is the process of collection information about the data in the database
+This information is used by the Optimizer to choose best execution plan.
+
+EXEC DBMS_STATS.gather_table_stats('ENH_DB','TEST_TB');
+
+341.Instead of trigger
+
+342. view u can update syntax for updating view
+
+343. What is Ref Cursor?
+
+344. What is SYS_REFCURSOR?
+
+	Oracle pre defined the type
+	Sys_refcursor is weakly typed ref cursor 
+	sys_refcursor can use in function to retrurn
+
+345. Diff Cursor and Ref Cursor
+
+	Cursor 											Ref cursor
+---------------------------------------------------------------------------------------
+1. Cursor is Static									Ref Cursor is dynamic 
+  (single query )									(can use multiple query)
+2. Cursor cannot pass as parameter for				We can pass as paramater to function/procedure 
+Procedure/function 
+3. Cannot return to client							Ref curosr can Return to client 
+4. cursor can be defined in PACKAGE					ref curosr cannot define outside of procedure / function 
+and can access globally across package 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+190. In base table you deleted one column and while querying mview will it show error
+
+	No, Mview has Last Refresh Data will have 
+	It will reflect after Refresh it will get error
+
+191. In a table you are adding one column and that column to be partitioned what to do
+
+		we cant directly add 1 column and partition 
+		1. we can create new table with partitioning
+		2. migrate the data from exisiting table
+		3. drop the table 
+
+192. If im going to update 1 million records if i got any error and how i will handle the error.
+ 
+		1. Bulk Collect with FORALL and SAVE EXPECTIONS
+		2. IN PLSQL Block we can handle using SQLERRM 
+		3. we can Handle Errors using SAVEPOINT
+		4. Creating Error log table
+
+193. For fast refresh what predefined caution we want to do.
+
+		1. Materialized View Log is exists
+		2. Mview should created using primary key -- to track the changes
+		3. Avoiding complex queries like sub query and analytical functions  -- only use equi join 
+
+194. In refresh it is not taking fast refresh it is going for complete refresh what u want to do?
+
+		1. Check the mview log exists and it is created with primary key or rowid
+		2. recreate mview log	-- drop old log   DROP MATERIALIZED VIEW LOG ON your_table_name;
+
+
+195. schema A and Schema B is there from schema A u want to access data what u want to do?
+
+	1. We need GRANT Previleges to SchemaB ( GRANT SELECT ON schemaA.employees TO enh_db;)
+	2. SELECT * FROM schemaA.employees;
+	OR if its is another db manager team will provide db link using dblink we access)
+
+196. can we do DML or DDL inside the fn.If u use pragma autonomous transaction u can execute without any error.
+
+	Yes we can use DDL and DML statements inside Function using PRAGMA 
+	we need to Explicitly COMMIT or Rollback the changes 
+	we can use error handling like SQLERRM 
+
+197. I dont want to give the schema name or table name for accessing the data from the other table what can I do?
+    -- SYNONYM
+
+
+-- Distinct and Group which is Fast?
+
+	Depends on Size of database
+	
+	If it is Small number of data Distinct is Faster
+	Larger Database Group By is Fast
+
+198. Supplied packages
+
+	DBMS_OUTPUT
+	DBMS_PROFILER
+	dbms_mview
+	dbms_xmlgen
+	UTL_FILE
+	
+
+
+What is SDLC?
+
+What is Waterfall Model?
+What is Agile Methodlogy? | Scrum Master ?
+Diff between Waterfall and Agile?
+What is Work Request. and Last Work Request?
+What is Change Request. what is last Change Request?
+Biggest issue faced in your project?
+AWR Report ?
+white box testing vs black box testing?
+What is Collections?
+
+	Collections is an ordered group of logically related elements with same data type 
+	And we access with the help of Index value 
+	It is a High Level Data Type 
+	We Declare Collection by using Type definition
+
+Type of Collections?
+
+	1. PL/SQL Table or Index By Table or Associative Array 
+	2. VARRAY
+	3. Nested Table 
+
+What is Scalar Data Type? 
+
+	Store Single Value (NUMBER, VARCHAR2)
+	
+What is Composite Data Type?
+
+Compisite Data Types - Store Multiple Values
+	i)  RECORD		    - Store 1 row of Data 
+		1) TYPE
+		2) %ROWTYPE
+	ii) Collection
+		1) VARRAY
+		2) Nested TABLE
+		3) Index By Table / Associative Array / PLSQL Table
+
+What are Collections Method?
+
+FIRST LAST COUNT EXTEND TRIM DELETE
+
+What are Multiset Operators?
+
+Mutiset  UNION 				UNION ALL
+Multiset UNION DISTINCT  	UNION
+Multiset INTERSECT			INTERSECT
+MULTISET EXCEPT 			MINUS
+
+What is Index By Table?
+
+What is Nested Table?
+
+What is Record?
+
+What is LIMIT?
+
+What is Bulk Exception?
+
+What is FORALL?
+
+What is Type Object?
+
+What are Oracle Data Types?
+
+	1. Scalar Data Type (CHAR, VARCHAR2, NUMBER, DATE..)
+	2. Composite Data Type 
+
+What is Bulk Bind?
+
+5. Where you use Bulk Collect in your Project?
+	Large Volumne of Data used in UTL Report 
+
+6. Bulk Collect Performance is Low what you do?
+
+	Use Limit instead of Fetching all record we can limit each time to improve performance.
+
+7. Diff b/w Records and %ROWTYPE?
+
+	%ROWTYPE
+	---------
+	Use to Declare a Record Type as Same Structure as a Database Table
+	
+	Multiple Table Data cannot store.
+	
+	RECORDS
+	-------
+	In RECORDS we no need to mention all Columns.
+	We can Store Multiple Table Data 
+
+8. Diff b/w Nested Table and Varray ?
+
+	In Nested Table there is no Limitations to Store DATA
+	In Varray there is Limitations like i.e VARRAY(30) we can use only 30  records mentioned in varray.
+
+9. Diff Between FOR and FORALL
+
+	For 	- Loop 		( to process data one by one)
+	FORALL  - Statement (use in Bulk Collect to Process Data in a Single go)
+
+Diff Between Equi Join and Outer Join?
+
+
+
+Where Trigger is used in your Project?
+
+	For Data Replication is Used
+
+/*
+CREATE OR REPLACE TRIGGER test_trg
+BEFORE INSERT OR UPDATE OR DELETE
+ON table1
+FOR EACH ROW
+BEGIN
+	IF INSERTING THEN
+		INSERT INTO table2 VALUES(:new.id);
+	END IF;
+	
+	IF UPDATING THEN
+		UPDATE table2
+		SET id = :new.id
+		WHERE id = :old.id;
+	END IF;
+	
+	IF DELETING THEN
+		DELETE table2
+		WHERE id = :old.id;
+	END IF;
+END test_trg;
+/
+*/
+
+
+# Written 1 trigger for Restrict Delete operation in Production Environment
+
+
+
+-- How to see number of records in a Table?
+
+SELECT NUM_ROWS FROM all_tables WHERE table_name = 'EMPLOYEES';
+
+-- Copy a Table without Index
+
+CREATE TABLE test_tb AS (SELECT * FROM employees);
+
+
+
+
+-- Diff b/w SQL Loader and External Table 
+
+SQL Loader 									External Table
+----------------------------------------------------------------------------
+1. Command Line Utility to Load 			Access Data from External File without Import
+Data from External File to DB Table.
+
+2. We can Insert, Delete, Update Data		Read only Data no DML Operations
+ During Loading Data 
+ 
+ 
+ 
+
+
+4. Print 1st day of Month, Last Day,  Week for given date.
+5. Rotating columns to rows, see below screenshot. See below source data.  
+   
+    prod     jan  feb mar  Apr
+    A        1     2   3   4         -------i/p
+    B        6     7   8   5
+
+    prod    month    days
+    A       jan      1
+    A       feb      2
+    A       mar      3
+    A       Apr      4            -------o/p
+    B       jan      6
+    B       feb      7
+    B       mar      8
+    B       Apr      5
+
+SELECT prod,month,days
+FROM your_table
+UNPIVOT (days FOR month IN (jan AS 'jan', feb AS 'feb', mar AS 'mar', apr AS 'Apr')) 
+ORDER BY prod, month;
+
+6. In collections tell me about VARRAY. 
+7. In your project what collection u have used.
+8. write syntax for nested table collection
+9. explain GTT.
+10.And in GTT is only used for till session ends.or for some other purpose also it is used.
+11.In a table u have index,partition and if u truncate a table the index and partition also gets dropped?
+
+No
+
+
+12.ur DBA is mailing u that for the 2 days the query is running slow and u don't know which package and which line u don't
+   know any information about which program is running slow as a developer what step u will take.Explain step by step.
+       Explained about dbms_profiler
+13.If it is a sql statement what step u will do?
+     Explain plan------->index------->hints
+14.Disadvantages of hints
+15.function based index
+16.Compound trigger.
+
+
+
+
+
+*) What do you think about in the meantime?
+	Focus on Self Improments
+	Stay Organized and plan
+	Productivity Focus
+	Team Collabration 
+	
+
+
+*) Are you a developer or support engineer?
+*) Do you Work in which environment?
+*) Is support ok for you?
+
+*) Which region do you work for?
+	
+	Country?
+
+*) How do you balance time?
+
+	To balance my time, I start by assessing all of my tasks and prioritizing them 
+	based on their deadlines and importance. 
+
+*) What is the data type?
+*) What are joins?
+*) Which join is faster, which one is slower?
+
+	INNER JOIN or EQUI Join  is generally the fastest type of join.
+	OUTER JOINs (LEFT, RIGHT, FULL) tend to be slower due to the need to handle non-matching rows.
+	CROSS JOIN is the slowest, especially for large tables, as it generates the Cartesian product.
+
+*) Tell me about cross join?
+*) Do you Know about IN ALL and IN ANY?
+*) which is faster ANY or ALL?
+*) Does NULL have storage space?
+*) Tell me about substr?
+*) Syntax of Substr?
+*) Explain with a scenario?
+*) How do you store data?
+*) Tell me about INSTR?
+*) Syntax of INSTR?
+*) Explain with a scenario?
+*) Tell me about Group By Clause?
+*) What is CEIL and FLOOR, give me value for 1234.6?
+*) Tell me about cursor?
+*) How many procedures do you work with?
+*) Tell me about stored procedures and user defined functions?
+*) Tell me about scalar and user defined Functions?
+*) What is a package?
+*) Did you create a package?
+*) How many digits does Rowid have?
+*) What are all the constraints?
+*) Which is a good rowid or index?
+*) Briefed about ROWNUM and ROWID and asked which is true? (Rowid can take more space because it has 18 digits, rownum is not faster than rowid but other pseudo columns)
+*) What is the view?
+*) What is a materialized view?
+*) Do you know about Boolean?
+*) Tell me about date and time datatypes?
+*) What are logical operators?
+*) How do oracle consider a null?
+*) Advance in datatype?
+
+	LOBs (CLOB, BLOB, etc.) for storing large objects.
+	XMLType for storing XML data.
+	User-Defined Object Types for complex, custom structures.
+	Collections for storing arrays, nested tables, and associative arrays.
+	JSON for handling modern, semi-structured data.
+	Timestamp and Interval types for precise date and time handling.
+	Spatial data (SDO_GEOMETRY) for geographic data processing.
+
+
+*) Do you work for support as well as developer?
+*) What will you do if I dont get you back?
+*) I will surrender a team under your supervision. Did you manage both your work and team?
+*) How did you manage?
+*) How many primary key columns do you have in a table?
+*) What are the index types?
+*) Tell me about transactions?
+*) Do we commit a save point?
+*) How to rollback a save point?
+*) Using rowid give me an example.
+
+
+
+
+Experience : 3.5
+Company : AZENTIO
+Interview mode : Virtual
+Round : Second Round - Technical
+Time : 24 mins
+
+1)Self intro with project and responsibilities?
+2)Could you brief me about your project
+3)What is the actual process in your project?
+4)Have you worked on performance issues?
+5)Tell me about a materialized view?
+6)Functionalities of materialized view
+7)Consider a query SELECT * FROM report_tb it has some issues in HR Schema, but work well in development and production what will you do?
+8)What are the performance tuning methods?
+9)How will you check if the SELECT * FROM report_tb query has slow issues?
+
+10)Can we order a query using a particular index?
+
+	Hints
+
+11)How is the query processing done in the oracle schema?
+	
+	Parsing - Check Syntax and Sematics and Shared Pool Check
+	Optimization - Choose best execution plan 
+	Row Source Generation - Data Fetch from table
+	Execution - Executed and result returned to user
+
+
+12)What actually do we do with a materialized view of how it will work?
+
+13)Will a materialized view be used to back up a query?
+
+	No. Mview has copy of query result
+
+14)How Can we solve performance issues with a materialized view, you wont have access to change query.
+
+15)If a query in Mview had more than 1 million records, it has some performance issues on my side but does not work well in the Development Schema, what will you do?
+
+
+1. How to fetch 2nd max salary
+2. In a table of records u want to omit first 25 records and u should fetch from after 25th record to last record.How u can
+   fetch.
+   
+    SELECT *
+      FROM (SELECT e.*
+                , ROW_NUMBER() OVER(ORDER BY employee_id)rnk
+              FROM employees e)
+     WHERE rnk >25;
+   
+
+3. In a dual NULL+1 what will be the output.
+
+	NULL
+
+4. U want to insert values from table A to table B what u will do?
+     INSERT INTO table B(SELECT * FROM table A);
+	 
+5. In a table I want to create a next next value for a primary key column.What can be done?
+     SEQUENCE
+	 
+6. I dont have sequence or anything from the table and its not allowing me to insert the values into the table what will 
+   be the situation?
+     TRIGGER.u might have created trigger for that table so its not allowing u to insert the values into the table.so u 
+     want to drop the trigger.
+7. How u will drop the trigger?
+8. In a table u have 5 records and u have put select * from table_name 5 records are displaying how u will write a insert
+   script for that?
+9. At a time u want to insert multiple inserts into a table what u will do? using SQL
+10.Aggregate functions what are all there
+11.I want to get only the last inserted record.For this it will search from first rows to last rows and then it will fetch 
+   the last record for this it degrades the performance in this suituation what u will do?
+      INDEX.
+12.Alternate solution for the above scenario?
+      TABLE PARTITION
+13. There are many tables u want to take the particular table what u will do?
+
+
+Company : LTI Mindtree
+Exp     : 5+ years
+
+1. Self Intro
+
+-- Collections and its type
+	Collections is an ordered group of logically related elements with same data type 
+	And we access with the help of Index value 
+	It is a High Level Data Type 
+	We Declare Collection by using Type definition
+	
+	1. PL/SQL Table or Index By Table or Associative Array 
+	2. VARRAY
+	3. Nested Table 
+	
+-- Materialized View
+
+	It is a Schema Object
+	Materialized View Contains Data
+	Mview Data is Read Only
+	Mview Data is not up to Date
+	We can Create Index on Materialized View
+
+-- In base table you deleted one column and while querying mview will it show error
+	No, Mview has Last Refresh Data will have 
+	It will reflect after Refresh it will get error
+	we can alter Mview
+	ALTER MATERIALIZED VIEW test_mvw REFRESH COMPLETE;
+	
+-- Table partitioned and its types
+	Table Partition subdivided large Table into small pieces of Tables. 
+	When the Table size is more than 2GB we do Table Partition
+	
+	1. List Partitioning	-- List of Countries
+	2. Range Partitiong		-- January to March | April to June
+	3. Hash Partitioning	-- h1, h2 --- Oracle will maintain
+
+-- AWR report
+	Oracle collects database performance statistics like CPU, I/O, Memory usage, SQL statements execution time,
+	Number of sessions, connections, 
+
+
+-- Difference between cursor and Refcursor
+	
+	Cursor 											Ref cursor
+---------------------------------------------------------------------------------------
+1. Cursor is Static									Ref Cursor is dynamic 
+  (single query )									(can use multiple query)
+2. Cursor cannot pass as parameter for				We can pass as paramater to function/procedure 
+Procedure/function 
+3. Cannot return to client							Ref curosr can Return to client 
+4. cursor can be defined in PACKAGE					ref curosr cannot define outside of procedure / function 
+and can access globally across package 
+
+ 
+8. difference between local and global index
+9. what is call by value and call by reference
+10.In a table you are adding one column and that column to be partitioned what to do
+11.Index and its types
+12.Mutating trigger
+13.One refcursor value can be passed to other refcursor value
+	we cant directly pass 
+14.cursor can be passed as a parameter in procedure
+	No by using refcursor we can pass 
+
+
+Round : 2
+
+1. Self Intro
+2. Department wise I want to give rank for employees based on the salary using analytical function.
+3. Diff between rank,dense_rank,row_number
+4. collections and bulkcollect
+5. If im going to update 1 million records if i got any error and how i will handle the error.
+6. exception handling.Predefined exceptions
+7. oracle packages
+8. materialized view how you will refresh.
+9. For fast refresh what predefined caution we want to do.
+
+-- In refresh it is not taking fast refresh it is going for complete refresh what u want to do?
+	1. Will check mview log was created bcs for Fast refresh log is important if log is not will create 
+	2. will check the primary key is Valid in base table 
+
+-- schema A and Schema B is there from schema A u want to access data what u want to do?
+
+	1. We need GRANT Previleges to SchemaB ( GRANT SELECT ON schemaA.employees TO enh_db;)
+	2. SELECT * FROM schemaA.employees;
+	OR if its is another db manager team will provide db link using dblink we access)
+	
+-- cursor and sysrefcursor
+
+	Cursor 											SYS_refcursor
+---------------------------------------------------------------------------------------
+1. Cursor is Static									Sys_refcursor is dynamic 
+  (single query )									(can use multiple query)
+2. Cursor cannot pass as parameter for				We can pass as paramater to function/procedure 
+Procedure/function 
+3. cursor can be defined in PACKAGE					sys_refcurosr can only be declared locally within a block
+and can access globally across package 
+
+
+-- stats_gather
+
+	If DML operation is performed frequently in a Table Oracle Automatically Gather Statistics for that Table
+	If the Table is Not Performed any DML Operations  frequently we can gather statistics to improve the performance.
+
+	Stats gatherering is the process of collection information about the data in the database
+	This information is used by the Optimizer to choose best execution plan.
+
+	EXEC DBMS_STATS.gather_table_stats('ENH_DB','TEST_TB');
+
+
+-- Instead of trigger
+
+-- view u can update.syntax for updating view.
+	In simple view possible but have some restrictions like group by, expression, 
+		analytical function used not possible 
+	Colplex View Not possible 
+	
+16.Diff b/w proc and fn
+17.can we do DML or DDL inside the fn.If u use pragma autonomous transaction u can execute without any error.
+18.can we call proc inside the fn and viceversa.
+19.I dont want to give the schema name or table name for accessing the data from the other table what can I do?
+    -- SYNONYM
+	
+	
+1. Write a PL/SQL block to update the salary of an employee 
+with a specific employee_id to a new value.
+
+2. PL/SQL Block to Calculate Average Salary:
+Write a PL/SQL block to calculate and display the average salary of 
+employees in a specific department.
+
+3.PL/SQL Block to Handle Exception:
+Write a PL/SQL block that retrieves the name and salary of an employee 
+with a specific employee_id, handling the scenario where the employee doesnt exist.
+
+4.PL/SQL Block for Cursor:
+Write a PL/SQL block that uses a cursor to retrieve and display the first name,
+salary, and department name of all employees.
+
+5.Write a PL/SQL block that displays the department name, manager name,
+ and the number of employees reporting to each manager in each department.
+
+6.Create a PL/SQL package named "EmployeeManagement" that contains two procedures:
+
+UpdateSalary: Accepts an employee ID and a salary increase percentage as parameters.
+It should update the salary of the specified employee by the given percentage.
+DeleteEmployee: Accepts an employee ID as a parameter. 
+It should delete the employee with the specified ID from the "employees" table.
+
+7.write the plsql block to find the given date is weekend or week days.
+
+8. Create a trigger named "delete_dept_trigger" that automatically deletes 
+all employees in a department when the department is deleted from the "departments" table.
+
+9. Create a trigger named "log_employee_update_trigger" that logs the details of 
+any updates to the "employees" table into a separate "employee_audit" table, including 
+the old and new values of the updated columns and the timestamp of the update.
+
+10. Create a trigger named "prevent_salary_increase_trigger" that prevents updating an 
+employees salary to an amount higher than their current salary.
+
+
+
+1. Tell me about your project and its overall architecture
+2. Index and define it.
+3. Table A
+col 1
+----------------
+1
+1
+0
+null
+
+table B
+col
+=========
+1
+0
+null
+1
+
+table c
+col
+--------------------
+1
+1
+0
+null
+
+what resultset of inner join ?
+
+4. Display all employees and their managers?
+5. Display the duplicate records without using group by and analytical function
+6. Diff between rank and dense_rank()
+7. Diff Between Decode and collease
+8. Diff between cursor and refcursor
+9. SELECT * FROM emp_id=101;
+   In this case it is using sort merge join why?
+
+10. SELECT * FROM tab1,tab2,tab3
+    WHERE tab1=tab2 AND tab2=tab3 AND tab3=tab1;
+   In this case why it is using nested loop join,hash join and sort merge join.
+
+11. DECLARE
+    v_entityname     rulesdbo.entity.entity_name%TYPE;
+    v_entitytype     rulesdbo.entity.entity_type%TYPE;
+    v_basecurrency   rulesdbo.entity.base_currency%TYPE;
+    v_entityid       rulesdbo.entity.entity_id%TYPE := 'TEDLIST';
+    v_entity_refcur  SYS_REFCURSOR;
+
+BEGIN
+    dbms_output.enable();
+    dbms_output.put_line('ENTITY ID IS ' || v_entityid);
+    dbms_output.put_line(' entity_name entity_type base_currency');
+    dbms_output.put_line('-----    -------   --------');
+    tk_te
+tk_test_entity(v_entityid, v_entity_refcur);
+    LOOP
+        FETCH v_entity_refcur INTO
+            v_entityname,
+            v_entitytype,
+            v_basecurrency;
+        EXIT WHEN v_entity_refcur%notfound;
+        dbms_output.enable();
+        dbms_output.put_line(v_entityname
+                             || '     '
+                             || v_entitytype
+                             || '     '
+                             || v_basecurrency);
+
+    END LOOP;
+
+    CLOSE v_entity_refcu
+
+In this u should store the values in one variable modify the code based on that?
+
+12. Write a stored procedure of refcursor type and store and display it in a OUT parameter. 
+13. U want to update a table you did not given any where condition and its not updating as a developer what you will do?
+	
+	Updating without where condition it will update all rows
+	If it is not Production no problem bcs in enh_tb region we use dummy data 
+	if it is production 
+	Backup Table 
+	Test in Backup Table
+	
+
+14. Normalization and explain
+15.GTT what variables used
+
+
+
+1.Tell me about ur proj and the issue u have faced
+2.Employees   ----> emp_id,emp_name,location,dep_id
+  Departments ----> dep_id,dep_name
+
+for joining this two tables and to fetch the employeees working in department IT which one is preferrable Inner join or 
+subquery.
+
+3.what is clustered index and non-clustered index
+
+Feature					Clustered Index				Non-Clustered Index
+---------------------------------------------------------------------------------------------------
+1. Order of rows		Stored in the order 
+						of the indexed column		No changes to the physical order of the rows
+
+2. Number per table		Only one allowed			Multiple allowed
+
+3. Storage				Data rows are the index		Separate index object with pointers to data rows
+
+4. Use case				used for primary keys		used for columns that are frequently searched
+
+----------------------------------------------------------------------------------------------------
+
+4.Have u design the work by yourself or any support u will get.
+
+In many of my projects, I have designed the work independently, 
+especially when customizing PL/SQL queries and implementing backend solutions for applications. 
+However, I also worked closely with cross-functional teams, such as frontend developers 
+and business analysts, to ensure that my design met both technical and business needs. 
+While I may have taken the lead on certain tasks, I recognize the importance of collaboration 
+and often seek support for areas where additional expertise is needed.
+
+5.Auto generated primary key column is there for that index will be automatically created.If so what index will be created
+     UNIQUE INDEX
+	 
+	 
+
+-- Atos Syntel
+
+We have one procedure around 100 lines including one delete dml also is there. 
+in front end screen we have process button whenever we click the process button 
+it run the procedure and delete the entires in pre order table some rare scenario 
+the delete not happening as a plsql developer how will you fix it and how to avoid this in future.
+
+
+1. Will check the Exception Handling is properly raised and handled and create and log table and 
+	trap the error log message.
+2. will check the Delete satatement is properly written in WHERE clause and commit or rollback.
+3. We can check if there is any Foreign key integrety constraints voilated.
+4. Will check the table lock either the other session is accessing the table at the 
+	time of deletion.  i.e V$LOCK  | V$SESSION | SELECT * FROM v$locked_object.
+   otherwise we can use Explicit lock using for UPDATE OF and WHERE CURRENT OF using cursor.
+5. if the problem with the code i try to debug the code using dbms_output.put_line 
+	before and after delete statement or DBMS_PROFILER or DBMS_TRACE for debugging.
+6. will check there is any TRIGGER for that table is fired before the delete operation.
+7. will test the delete statement seperately outside of the procedure.
+8. To avoid this issue in future we can handle the exception and error log table for audit and debug.
+9. we can use the DELETE statement as seperate session using PRAGMA AUTONOMOUS TRANSACTION.
+10. we can unit test for all possible scenarios.
+11. we can check performance load test if the procedure can handle excepted volume of data
+	if the table is large we can use partitioning for that table. 
+12. we can use FORALL for bulk processing.
+13. we can ask front end team to disbale the process button after click and reenable after 
+	process completed to avoid duplicate click of process button.
+	
+
+/* we have table name A containg primary key and Table B is child table and 
+	Table c is child of b i want to delete the record from Table A how? */
+
+1. Table B and Table c has reference foreign key columns to Table A 
+2. Initially i check the dependencies of Table A either there is any other table has dependency.
+	using user_dependencies.
+3. Then i backup the Table A 
+4. if we need to delete the Parent table A we need to alter the Table A using ON DELETE CASCADE or
+	ON DELETE SET NULL. 
+5. Finally i Delete the records in Table A
+
+
+/* we have Table name called Product_reviews we have columns like product_id, product_name, review_rating 
+i need Top 5 ratings? */
+
+SELECT product_id, product_name, review_rating
+FROM (
+    SELECT product_id, product_name, review_rating,
+           DENSE_RANK() OVER (ORDER BY review_rating DESC) AS rating_rank
+    FROM Product_reviews
+)
+WHERE rating_rank <= 5;
+
+
+SELECT product_id, product_name, review_rating
+FROM Product_reviews
+ORDER BY review_rating DESC
+FETCH FIRST 5 ROWS ONLY;
+
+
+-- we have order screen has multiple queries how will you check that particular query is slow?
+
+1. initially i check the SQL trace using i.e ALTER SESSION SET SQL_TRACE = TRUE;
+2. using V$SQL and V$SQLAREA to see currently executing and recently executed SQL statements.
+3. using performance Tuning method we can improve the query.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
